@@ -52,14 +52,19 @@ document.addEventListener("visibilitychange", () => {
   }
 });</script>
 
-<audio id="music" src="fakem.wav" autoplay loop muted></audio>
+<audio id="music" src="fakem.wav" loop></audio>
 
 <script>
-window.addEventListener("load", () => {
-  const music = document.getElementById("music");
-  music.muted = false;
-  music.play();
-});
+const music = document.getElementById("music");
+
+function startAudio() {
+  music.play().catch(err => console.log("Audio blocked:", err));
+  document.removeEventListener("click", startAudio);
+  document.removeEventListener("touchstart", startAudio);
+}
+
+document.addEventListener("click", startAudio);
+document.addEventListener("touchstart", startAudio);
 </script>
 	
 	<script data-framer-appear-animation="no-preference"></script>
