@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kvízovač - Interaktívna trieda</title>
+    <style>
+        :root {
+            --primary: #4338ca;
+            --primary-hover: #3730a3;
+            --secondary: #0f766e;
+            --secondary-hover: #0d9488;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --bg-dark: #111827;
+            --bg-card: #1f2937;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            
+            /* Farby odpovedí (štýl Kahoot) */
+            --ans-a: #e21b3c;
+            --ans-b: #1368ce;
+            --ans-c: #d89e00;
+            --ans-d: #26890c;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
+        
+        .screen { display: none; min-height: 100vh; width: 100%; }
+        .screen.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem; height: 100%; }
+        .center-content { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; }
+        
+        .logo { font-size: 3.5rem; margin-bottom: 0.5rem; color: #fff; }
+        .subtitle { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.2rem; }
+        
+        /* Tlačidlá */
+        .btn { border: none; border-radius: 8px; padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.1s, background-color 0.2s; color: white; }
+        .btn:active { transform: scale(0.95); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-primary { background-color: var(--primary); }
+        .btn-primary:hover { background-color: var(--primary-hover); }
+        .btn-secondary { background-color: var(--secondary); }
+        .btn-secondary:hover { background-color: var(--secondary-hover); }
+        .btn-success { background-color: var(--success); }
+        .btn-danger { background-color: var(--danger); }
+        .btn-large { font-size: 1.25rem; padding: 1rem 2rem; }
+        .btn-small { padding: 0.5rem 1rem; font-size: 0.9rem; }
+        .btn-full { width: 100%; }
+        .role-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        
+        /* Karty & Formuláre */
+        .card { background-color: var(--bg-card); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .card h3 { margin-bottom: 1rem; border-bottom: 1px solid #374151; padding-bottom: 0.5rem; }
+        .form-group { margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        input, select, textarea { background-color: #374151; border: 1px solid #4b5563; color: white; padding: 0.75rem; border-radius: 6px; font-size: 1rem; width: 100%; }
+        textarea { resize: vertical; }
+        .drop-zone { border: 2px dashed #4b5563; border-radius: 8px; padding: 2rem; text-align: center; color: var(--text-muted); cursor: pointer; transition: background 0.2s; margin-bottom: 1rem; }
+        .drop-zone:hover, .drop-zone.dragover { background-color: #374151; border-color: var(--primary); }
+        
+        /* Utility */
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .text-center { text-align: center; }
+        .hidden { display: none !important; }
+        .error-text { color: #f87171; margin-top: 0.5rem; font-weight: bold; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+
+        /* Editor otázok */
+        .question-edit-block { background-color: var(--bg-card); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--primary); }
+        .options-edit { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem; }
+        .option-row { display: flex; align-items: center; gap: 0.5rem; }
+        
+        /* Lobby */
+        .pin-display { font-size: 4rem; font-weight: 900; letter-spacing: 4px; color: #fcd34d; background: #000; padding: 1rem 2rem; border-radius: 12px; margin: 1rem 0; }
+        .players-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
+        .player-badge { background-color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; animation: scaleIn 0.3s; }
+        
+        /* Hra - Učiteľ */
+        .game-header { display: flex; justify-content: space-between; align-items: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 2rem; padding: 1rem; background: var(--bg-card); border-radius: 12px; }
+        .timer { background: #000; color: white; padding: 0.5rem 1rem; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; }
+        .question-text { font-size: 2.5rem; text-align: center; margin-bottom: 2rem; min-height: 120px; display: flex; align-items: center; justify-content: center; }
+        .answers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .answer-card { padding: 2rem; border-radius: 12px; font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; color: white; box-shadow: 0 4px 0 rgba(0,0,0,0.2); }
+        .ans-a { background-color: var(--ans-a); } .ans-b { background-color: var(--ans-b); } .ans-c { background-color: var(--ans-c); } .ans-d { background-color: var(--ans-d); }
+        .answer-card.correct { border: 4px solid white; transform: scale(1.02); }
+        .answer-card.dimmed { opacity: 0.3; }
+        
+        /* Hra - Študent */
+        .student-game-bg { background-color: #f3f4f6; }
+        .student-game-header { background: white; color: black; padding: 1rem; text-align: center; font-size: 1.2rem; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .student-answers-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; height: calc(100vh - 60px); gap: 0.5rem; padding: 0.5rem; }
+        .student-btn { border: none; border-radius: 8px; box-shadow: inset 0 -4px 0 rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.1s; }
+        .student-btn:active { transform: translateY(4px); box-shadow: inset 0 0 0 rgba(0,0,0,0.2); }
+        .student-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+        .student-feedback { position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; z-index: 100; }
+        .student-feedback.correct { background-color: var(--success); }
+        .student-feedback.incorrect { background-color: var(--danger); }
+        .student-feedback h2 { font-size: 3rem; margin-bottom: 1rem; }
+        .student-feedback p { font-size: 1.5rem; background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 8px; }
+        
+        /* Spinner */
+        .spinner { border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 1rem auto; }
+        
+        /* Leaderboard */
+        .leaderboard { width: 100%; max-width: 500px; }
+        .lb-row { display: flex; justify-content: space-between; background: var(--bg-card); padding: 1rem; margin-bottom: 0.5rem; border-radius: 8px; font-size: 1.2rem; font-weight: bold; }
+        .lb-row:nth-child(1) { background: #fbbf24; color: black; transform: scale(1.05); }
+        .lb-row:nth-child(2) { background: #94a3b8; color: black; }
+        .lb-row:nth-child(3) { background: #b45309; color: white; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <!-- Hlavné menu -->
+    <div id="screen-home" class="screen active">
+        <div class="container center-content">
+            <h1 class="logo">Kvízovač 🎓</h1>
+            <p class="subtitle">Interaktívna výučba s podporou umelej inteligencie</p>
+            <div class="role-buttons">
+                <button id="btn-role-teacher" class="btn btn-primary btn-large">Som Učiteľ</button>
+                <button id="btn-role-student" class="btn btn-secondary btn-large">Som Študent</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Učiteľ: Nastavenie kvízu -->
+    <div id="screen-teacher-setup" class="screen">
+        <div class="container">
+            <header class="top-bar">
+                <h2>Učiteľský panel - Príprava kvízu</h2>
+                <button class="btn btn-small" onclick="app.showScreen('screen-home')">Späť</button>
+            </header>
+            
+            <div class="card">
+                <h3>1. Zdrojové materiály (Text alebo Súbor)</h3>
+                <div class="drop-zone" id="drop-zone">
+                    <p>Potiahni a pusť textový súbor (.txt) sem, alebo klikni pre výber.</p>
+                    <input type="file" id="file-input" accept=".txt" hidden>
+                </div>
+                <textarea id="text-input" rows="6" placeholder="Alebo sem vlož učebný text, z ktorého sa vytvoria otázky..."></textarea>
+            </div>
+
+            <div class="card">
+                <h3>2. Parametre kvízu</h3>
+                <div class="form-group">
+                    <label for="question-count">Počet otázok:</label>
+                    <input type="number" id="question-count" min="1" max="20" value="5">
+                </div>
+                <button id="btn-generate-ai" class="btn btn-primary btn-full">Vygenerovať otázky</button>
+                <div id="ai-loading" class="hidden text-center mt-1">
+                    <div class="spinner"></div>
+                    <p>Spracovávam text a tvorím otázky...</p>
+                </div>
+                <p id="ai-error" class="error-text hidden text-center"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Učiteľ: Editor otázok -->
+    <div id="screen-teacher-editor" class="screen">
+        <div class="container">
+            <header class="top-bar">
+                <h2>Kontrola a Úprava otázok</h2>
+                <button class="btn btn-small" onclick="app.showScreen('screen-teacher-setup')">Späť</button>
+            </header>
+            <div id="questions-container"></div>
+            <div class="action-bar mt-2">
+                <button id="btn-start-lobby" class="btn btn-success btn-large btn-full">Vytvoriť miestnosť a Spustiť hru</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Učiteľ: Lobby -->
+    <div id="screen-teacher-lobby" class="screen">
+        <div class="container center-content">
+            <h2>Pripoj sa na hru!</h2>
+            <div class="pin-display">PIN: <span id="host-pin">0000</span></div>
+            <p class="waiting-text">Čaká sa na hráčov...</p>
+            <div class="players-grid" id="host-players-list"></div>
+            <button id="btn-start-game" class="btn btn-success btn-large mt-2" disabled>Odštartovať kvíz</button>
+        </div>
+    </div>
+
+    <!-- Učiteľ: Aktívna hra -->
+    <div id="screen-teacher-game" class="screen">
+        <div class="container">
+            <header class="game-header">
+                <span id="host-q-counter">Otázka 1/5</span>
+                <span class="timer" id="host-timer">20</span>
+            </header>
+            <h2 class="question-text" id="host-question-text">Text otázky?</h2>
+            <div class="answers-grid">
+                <div class="answer-card ans-a" id="host-opt-0">A</div>
+                <div class="answer-card ans-b" id="host-opt-1">B</div>
+                <div class="answer-card ans-c" id="host-opt-2">C</div>
+                <div class="answer-card ans-d" id="host-opt-3">D</div>
+            </div>
+            <div class="action-bar mt-2 text-center">
+                <button id="btn-next-question" class="btn btn-primary btn-large hidden">Ďalšia otázka</button>
+                <button id="btn-show-results" class="btn btn-success btn-large hidden">Zobraziť výsledky</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Učiteľ: Výsledky -->
+    <div id="screen-teacher-leaderboard" class="screen">
+        <div class="container center-content">
+            <h2>Konečné poradie</h2>
+            <div class="leaderboard mt-2" id="final-leaderboard"></div>
+            <button class="btn btn-primary btn-large mt-2" onclick="app.resetApp()">Nová hra</button>
+        </div>
+    </div>
+
+    <!-- Študent: Login -->
+    <div id="screen-student-login" class="screen">
+        <div class="container center-content">
+            <h1 class="logo">Kvízovač 🎓</h1>
+            <div class="card w-100" style="max-width: 400px; width: 100%;">
+                <input type="text" id="student-pin" placeholder="PIN miestnosti" maxlength="4" class="text-center" style="font-size: 1.5rem; letter-spacing: 2px;">
+                <input type="text" id="student-nick" placeholder="Tvoja prezývka" maxlength="12" class="text-center mt-1" style="font-size: 1.2rem;">
+                <button id="btn-join-game" class="btn btn-primary btn-large btn-full mt-2">Pripojiť sa</button>
+                <p id="student-error" class="error-text hidden text-center"></p>
+            </div>
+            <button class="btn btn-small mt-2" onclick="app.showScreen('screen-home')">Späť do menu</button>
+        </div>
+    </div>
+
+    <!-- Študent: Lobby -->
+    <div id="screen-student-lobby" class="screen">
+        <div class="container center-content">
+            <h2>Si vnútri!</h2>
+            <p id="student-lobby-nick" style="font-size: 2rem; font-weight: bold; color: var(--primary); margin: 1rem 0;">Prezývka</p>
+            <div class="spinner"></div>
+            <p>Sleduj obrazovku učiteľa. Hra čoskoro začne...</p>
+        </div>
+    </div>
+
+    <!-- Študent: Hra -->
+    <div id="screen-student-game" class="screen student-game-bg">
+        <div class="student-game-header">
+            <span id="student-score">Skóre: 0</span>
+        </div>
+        <div class="student-answers-grid">
+            <button class="student-btn ans-a" onclick="app.submitAnswer(0)"></button>
+            <button class="student-btn ans-b" onclick="app.submitAnswer(1)"></button>
+            <button class="student-btn ans-c" onclick="app.submitAnswer(2)"></button>
+            <button class="student-btn ans-d" onclick="app.submitAnswer(3)"></button>
+        </div>
+        <div id="student-feedback" class="student-feedback hidden">
+            <h2 id="feedback-title">Správne!</h2>
+            <p id="feedback-points">+850 bodov</p>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. AI SERVICE (MOCK) ---
+        const AIService = {
+            async generateQuestions(text, count) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        try {
+                            const questions = this._mockAIProcessing(text || "", count);
+                            resolve(questions);
+                        } catch (err) {
+                            reject(err);
+                        }
+                    }, 1500);
+                });
+            },
+
+            _mockAIProcessing(input, count) {
+                const text = input.trim();
+                const generated = [];
+                const fallback = [
+                    { question: "Čo je hlavným cieľom tohto materiálu?", options: ["Vzdelávať", "Zabávať", "Zavádzať", "Ignorovať"], correctIndex: 0 },
+                    { question: "Aká bola úroveň prečítaného textu?", options: ["Ľahká", "Priemerná", "Náročná", "Nezrozumiteľná"], correctIndex: 1 },
+                    { question: "Ktoré z nasledujúcich tvrdení je všeobecne pravdivé?", options: ["Zem je plochá", "Voda vrie pri 100°C", "Slnko obieha Zem", "Mesiac je syr"], correctIndex: 1 }
+                ];
+
+                if (text.length > 20) {
+                    const words = text.split(/\s+/).filter(w => w.length > 4);
+                    for(let i=0; i<count; i++) {
+                        if (words.length > i+3) {
+                            const keyword = words[Math.floor(Math.random() * words.length)];
+                            generated.push({
+                                question: `Aký je význam slova "${keyword}" v texte?`,
+                                options: ["Kľúčový pojem", "Vedľajšia informácia", "Chyba", "Autor"],
+                                correctIndex: 0
+                            });
+                        } else {
+                            // Naklonuj fallback otázku, aby sme neprepisovali referencie
+                            generated.push(JSON.parse(JSON.stringify(fallback[i % fallback.length])));
+                        }
+                    }
+                } else {
+                    for(let i=0; i<count; i++) {
+                        generated.push(JSON.parse(JSON.stringify(fallback[i % fallback.length])));
+                    }
+                }
+                
+                // Premiešanie možností
+                return generated.map(q => {
+                    const opts = [...q.options];
+                    const correctStr = opts[q.correctIndex];
+                    for (let i = opts.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [opts[i], opts[j]] = [opts[j], opts[i]];
+                    }
+                    return { question: q.question, options: opts, correctIndex: opts.indexOf(correctStr) };
+                });
+            }
+        };
+
+        // --- 2. NETWORK ENGINE (BroadcastChannel) ---
+        class GameNetwork {
+            constructor(role, messageHandler) {
+                this.channel = new BroadcastChannel('quiz_app_channel');
+                this.role = role;
+                this.channel.onmessage = (event) => { if (messageHandler) messageHandler(event.data); };
+            }
+            send(type, payload = {}) { this.channel.postMessage({ type, ...payload }); }
+            close() { this.channel.close(); }
+        }
+
+        // --- 3. HLAVNÁ APLIKÁCIA ---
+        const app = {
+            state: {
+                role: null, pin: null, nickname: null, players: {}, questions: [],
+                currentQuestionIndex: 0, timerInterval: null, timeLeft: 0,
+                isAnsweringActive: false, studentAnswered: false, answersCount: 0
+            },
+            network: null,
+
+            init() {
+                // Naviazanie eventov
+                document.getElementById('btn-role-teacher').onclick = () => { this.state.role = 'teacher'; this.showScreen('screen-teacher-setup'); };
+                document.getElementById('btn-role-student').onclick = () => { this.state.role = 'student'; this.showScreen('screen-student-login'); };
+                
+                // Drag and Drop
+                const dropZone = document.getElementById('drop-zone');
+                const fileInput = document.getElementById('file-input');
+                dropZone.onclick = () => fileInput.click();
+                dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('dragover'); };
+                dropZone.ondragleave = () => dropZone.classList.remove('dragover');
+                dropZone.ondrop = (e) => {
+                    e.preventDefault(); dropZone.classList.remove('dragover');
+                    if(e.dataTransfer.files.length) this.handleFileUpload(e.dataTransfer.files[0]);
+                };
+                fileInput.onchange = (e) => { if(e.target.files.length) this.handleFileUpload(e.target.files[0]); };
+
+                // Tlačidlá
+                document.getElementById('btn-generate-ai').onclick = () => this.generateQuestions();
+                document.getElementById('btn-start-lobby').onclick = () => this.createRoom();
+                document.getElementById('btn-start-game').onclick = () => this.startGame();
+                document.getElementById('btn-next-question').onclick = () => this.nextQuestion();
+                document.getElementById('btn-show-results').onclick = () => this.endGame();
+                document.getElementById('btn-join-game').onclick = () => this.joinRoom();
+            },
+
+            showScreen(screenId) {
+                document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+                document.getElementById(screenId).classList.add('active');
+            },
+
+            resetApp() {
+                this.state = { role: null, pin: null, nickname: null, players: {}, questions: [], currentQuestionIndex: 0, timerInterval: null, timeLeft: 0 };
+                if(this.network) { this.network.close(); this.network = null; }
+                document.getElementById('text-input').value = '';
+                this.showScreen('screen-home');
+            },
+
+            // --- Učiteľ: Setup & AI ---
+            handleFileUpload(file) {
+                if (!file.name.endsWith('.txt')) return alert('Prosím, nahrajte iba .txt súbory.');
+                const reader = new FileReader();
+                reader.onload = (e) => document.getElementById('text-input').value = e.target.result;
+                reader.readAsText(file);
+            },
+
+            async generateQuestions() {
+                const errorEl = document.getElementById('ai-error');
+                errorEl.classList.add('hidden');
+                document.getElementById('btn-generate-ai').classList.add('hidden');
+                document.getElementById('ai-loading').classList.remove('hidden');
+
+                try {
+                    const text = document.getElementById('text-input').value;
+                    const count = parseInt(document.getElementById('question-count').value) || 5;
+                    
+                    this.state.questions = await AIService.generateQuestions(text, count);
+                    
+                    document.getElementById('ai-loading').classList.add('hidden');
+                    document.getElementById('btn-generate-ai').classList.remove('hidden');
+                    
+                    this.renderEditor();
+                    this.showScreen('screen-teacher-editor');
+                } catch (error) {
+                    console.error(error);
+                    document.getElementById('ai-loading').classList.add('hidden');
+                    document.getElementById('btn-generate-ai').classList.remove('hidden');
+                    errorEl.innerText = "Nastala chyba pri generovaní. Skúste to znova.";
+                    errorEl.classList.remove('hidden');
+                }
+            },
+
+            renderEditor() {
+                const container = document.getElementById('questions-container');
+                container.innerHTML = '';
+                this.state.questions.forEach((q, qIndex) => {
+                    const block = document.createElement('div');
+                    block.className = 'question-edit-block';
+                    let html = `<h4>Otázka ${qIndex + 1}</h4>
+                                <input type="text" value="${q.question}" onchange="app.state.questions[${qIndex}].question = this.value" style="margin-bottom: 10px;">
+                                <div class="options-edit">`;
+                    q.options.forEach((opt, oIndex) => {
+                        const isChecked = q.correctIndex === oIndex ? 'checked' : '';
+                        html += `<div class="option-row">
+                                    <input type="radio" name="correct-${qIndex}" value="${oIndex}" ${isChecked} onchange="app.state.questions[${qIndex}].correctIndex = ${oIndex}" style="width:auto; cursor:pointer;">
+                                    <input type="text" value="${opt}" onchange="app.state.questions[${qIndex}].options[${oIndex}] = this.value">
+                                 </div>`;
+                    });
+                    html += `</div>`;
+                    block.innerHTML = html;
+                    container.appendChild(block);
+                });
+            },
+
+            // --- Učiteľ: Hra ---
+            createRoom() {
+                this.state.pin = Math.floor(1000 + Math.random() * 9000).toString();
+                this.state.players = {};
+                document.getElementById('host-pin').innerText = this.state.pin;
+                document.getElementById('host-players-list').innerHTML = '';
+                this.network = new GameNetwork('host', this.handleHostMessages.bind(this));
+                this.showScreen('screen-teacher-lobby');
+            },
+
+            handleHostMessages(msg) {
+                if (msg.pin !== this.state.pin) return;
+                if (msg.type === 'JOIN') {
+                    if (this.state.players[msg.nickname]) {
+                        this.network.send('ERROR', { pin: this.state.pin, target: msg.nickname, message: 'Prezývka sa už používa.' });
+                    } else {
+                        this.state.players[msg.nickname] = 0;
+                        this.updateHostLobby();
+                        this.network.send('PLAYER_ACCEPTED', { pin: this.state.pin, nickname: msg.nickname });
+                    }
+                } else if (msg.type === 'SUBMIT_ANSWER' && this.state.isAnsweringActive) {
+                    this.processAnswer(msg.nickname, msg.answerIndex, msg.timeLeft);
+                }
+            },
+
+            updateHostLobby() {
+                const list = document.getElementById('host-players-list');
+                list.innerHTML = '';
+                const players = Object.keys(this.state.players);
+                players.forEach(name => {
+                    const badge = document.createElement('div');
+                    badge.className = 'player-badge';
+                    badge.innerText = name;
+                    list.appendChild(badge);
+                });
+                document.getElementById('btn-start-game').disabled = players.length === 0;
+            },
+
+            startGame() {
+                this.state.currentQuestionIndex = -1;
+                this.network.send('START_GAME', { pin: this.state.pin });
+                this.showScreen('screen-teacher-game');
+                this.nextQuestion();
+            },
+
+            nextQuestion() {
+                this.state.currentQuestionIndex++;
+                const qIndex = this.state.currentQuestionIndex;
+                if (qIndex >= this.state.questions.length) return this.endGame();
+
+                const q = this.state.questions[qIndex];
+                document.getElementById('btn-next-question').classList.add('hidden');
+                document.querySelectorAll('.answer-card').forEach(c => c.classList.remove('correct', 'dimmed'));
+                
+                document.getElementById('host-q-counter').innerText = `Otázka ${qIndex + 1}/${this.state.questions.length}`;
+                document.getElementById('host-question-text').innerText = q.question;
+                q.options.forEach((opt, i) => document.getElementById(`host-opt-${i}`).innerText = opt);
+
+                this.state.isAnsweringActive = true;
+                this.state.answersCount = 0;
+                this.network.send('NEW_QUESTION', { pin: this.state.pin, index: qIndex });
+                this.startTimer(20, () => this.showCorrectAnswer());
+            },
+
+            startTimer(seconds, onComplete) {
+                this.state.timeLeft = seconds;
+                document.getElementById('host-timer').innerText = this.state.timeLeft;
+                clearInterval(this.state.timerInterval);
+                this.state.timerInterval = setInterval(() => {
+                    this.state.timeLeft--;
+                    document.getElementById('host-timer').innerText = this.state.timeLeft;
+                    
+                    if (this.state.answersCount >= Object.keys(this.state.players).length) this.state.timeLeft = 0;
+                    
+                    if (this.state.timeLeft <= 0) {
+                        clearInterval(this.state.timerInterval);
+                        if (onComplete) onComplete();
+                    }
+                }, 1000);
+            },
+
+            processAnswer(nickname, answerIndex, timeAtSubmission) {
+                this.state.answersCount++;
+                const q = this.state.questions[this.state.currentQuestionIndex];
+                let points = 0, isCorrect = false;
+                
+                if (answerIndex === q.correctIndex) {
+                    isCorrect = true;
+                    points = Math.round(500 + (500 * (timeAtSubmission / 20))); // Rýchlosť
+                    this.state.players[nickname] += points;
+                }
+                this.network.send('ANSWER_RESULT', { pin: this.state.pin, target: nickname, isCorrect, points, totalScore: this.state.players[nickname] });
+            },
+
+            showCorrectAnswer() {
+                this.state.isAnsweringActive = false;
+                const q = this.state.questions[this.state.currentQuestionIndex];
+                document.querySelectorAll('.answer-card').forEach((el, index) => {
+                    if (index === q.correctIndex) el.classList.add('correct');
+                    else el.classList.add('dimmed');
+                });
+                this.network.send('QUESTION_ENDED', { pin: this.state.pin });
+                if (this.state.currentQuestionIndex < this.state.questions.length - 1) {
+                    document.getElementById('btn-next-question').classList.remove('hidden');
+                } else {
+                    document.getElementById('btn-show-results').classList.remove('hidden');
+                }
+            },
+
+            endGame() {
+                this.network.send('END_GAME', { pin: this.state.pin });
+                const lb = document.getElementById('final-leaderboard');
+                lb.innerHTML = '';
+                Object.entries(this.state.players).sort((a, b) => b[1] - a[1]).forEach(([nick, score], i) => {
+                    const row = document.createElement('div');
+                    row.className = 'lb-row';
+                    row.innerHTML = `<span>${i + 1}. ${nick}</span> <span>${score} b</span>`;
+                    lb.appendChild(row);
+                });
+                this.showScreen('screen-teacher-leaderboard');
+            },
+
+            // --- Študent: Hra ---
+            joinRoom() {
+                const pin = document.getElementById('student-pin').value.trim();
+                const nick = document.getElementById('student-nick').value.trim();
+                const err = document.getElementById('student-error');
+
+                if (pin.length !== 4 || nick.length < 2) {
+                    err.innerText = "Zadajte 4-miestny PIN a prezývku (min 2 znaky).";
+                    err.classList.remove('hidden'); return;
+                }
+                this.state.pin = pin; this.state.nickname = nick;
+                err.classList.add('hidden');
+
+                this.network = new GameNetwork('student', this.handleStudentMessages.bind(this));
+                this.network.send('JOIN', { pin: this.state.pin, nickname: this.state.nickname });
+                document.getElementById('student-lobby-nick').innerText = this.state.nickname;
+                this.showScreen('screen-student-lobby');
+            },
+
+            handleStudentMessages(msg) {
+                if (msg.pin !== this.state.pin) return;
+                if (msg.target && msg.target !== this.state.nickname) return;
+
+                switch (msg.type) {
+                    case 'ERROR':
+                        document.getElementById('student-error').innerText = msg.message;
+                        document.getElementById('student-error').classList.remove('hidden');
+                        this.showScreen('screen-student-login');
+                        break;
+                    case 'START_GAME':
+                        this.showScreen('screen-student-game');
+                        break;
+                    case 'NEW_QUESTION':
+                        this.state.studentAnswered = false;
+                        document.getElementById('student-feedback').classList.add('hidden');
+                        document.querySelectorAll('.student-btn').forEach(btn => { btn.disabled = false; btn.style.opacity = "1"; });
+                        break;
+                    case 'ANSWER_RESULT':
+                        this.showStudentFeedback(msg.isCorrect, msg.points, msg.totalScore);
+                        break;
+                    case 'QUESTION_ENDED':
+                        if (!this.state.studentAnswered) this.showStudentFeedback(false, 0, null);
+                        break;
+                    case 'END_GAME':
+                        const fb = document.getElementById('student-feedback');
+                        fb.className = "student-feedback";
+                        fb.style.backgroundColor = "var(--primary)";
+                        document.getElementById('feedback-title').innerText = "Koniec hry!";
+                        document.getElementById('feedback-points').innerText = "Sleduj tabuľu učiteľa.";
+                        fb.classList.remove('hidden');
+                        break;
+                }
+            },
+
+            submitAnswer(index) {
+                if (this.state.studentAnswered) return;
+                this.state.studentAnswered = true;
+                document.querySelectorAll('.student-btn').forEach((btn, i) => {
+                    btn.disabled = true; if (i !== index) btn.style.opacity = "0.3";
+                });
+                this.network.send('SUBMIT_ANSWER', { pin: this.state.pin, nickname: this.state.nickname, answerIndex: index, timeLeft: 20 });
+                
+                const fb = document.getElementById('student-feedback');
+                fb.className = "student-feedback";
+                fb.style.backgroundColor = "var(--bg-card)";
+                document.getElementById('feedback-title').innerText = "Odoslané...";
+                document.getElementById('feedback-points').innerText = "Čakám na ostatných";
+                fb.classList.remove('hidden');
+            },
+
+            showStudentFeedback(isCorrect, points, totalScore) {
+                const fb = document.getElementById('student-feedback');
+                fb.className = `student-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+                document.getElementById('feedback-title').innerText = isCorrect ? "Správne!" : "Nesprávne!";
+                document.getElementById('feedback-points').innerText = isCorrect ? `+${points} bodov` : "0 bodov";
+                if (totalScore !== null) document.getElementById('student-score').innerText = `Skóre: ${totalScore}`;
+                fb.classList.remove('hidden');
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => app.init());
+    </script>
+</body>
+</html>
