@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prihlásenie — Kern</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="auth-shell">
+  <div class="glass auth-card">
+    <div class="auth-logo">
+      <a href="../index.html" class="logo">
+        <span class="logo-mark">K</span>
+        <span>Kern<span class="logo-sub">Vizuálna akadémia</span></span>
+      </a>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab" data-tab="prihlasit">Prihlásiť sa</button>
+      <button class="auth-tab" data-tab="registrovat">Registrovať sa</button>
+    </div>
+
+    <h1 class="auth-title" id="auth-title">Vitaj späť</h1>
+    <p class="auth-sub" id="auth-sub">Prihlás sa a pokračuj vo svojej vizuálnej ceste.</p>
+
+    <!-- Prihlásenie -->
+    <div id="panel-prihlasit">
+      <div class="form-alert" id="login-alert"></div>
+      <form id="form-prihlasit" novalidate>
+        <div class="field">
+          <label for="login-email">E-mail</label>
+          <input type="email" id="login-email" placeholder="meno@priklad.sk" autocomplete="email" required>
+          <span class="field-error">Zadaj platnú e-mailovú adresu.</span>
+        </div>
+        <div class="field">
+          <label for="login-password">Heslo</label>
+          <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
+          <span class="field-error">Heslo musí mať aspoň 6 znakov.</span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block auth-submit">Prihlásiť sa</button>
+      </form>
+      <p class="auth-note">Nemáš účet? <a href="#" onclick="document.querySelector('[data-tab=registrovat]').click();return false;" style="color:var(--primary);font-weight:700;">Zaregistruj sa</a></p>
+    </div>
+
+    <!-- Registrácia -->
+    <div id="panel-registrovat" style="display:none;">
+      <div class="form-alert" id="reg-alert"></div>
+      <form id="form-registrovat" novalidate>
+        <div class="field">
+          <label for="reg-name">Meno</label>
+          <input type="text" id="reg-name" placeholder="Tvoje meno" autocomplete="name" required>
+          <span class="field-error">Zadaj svoje meno (aspoň 2 znaky).</span>
+        </div>
+        <div class="field">
+          <label for="reg-email">E-mail</label>
+          <input type="email" id="reg-email" placeholder="meno@priklad.sk" autocomplete="email" required>
+          <span class="field-error">Zadaj platnú e-mailovú adresu.</span>
+        </div>
+        <div class="field">
+          <label for="reg-password">Heslo</label>
+          <input type="password" id="reg-password" placeholder="••••••••" autocomplete="new-password" required>
+          <span class="field-error">Heslo musí mať aspoň 6 znakov.</span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block auth-submit">Vytvoriť účet</button>
+      </form>
+      <p class="auth-note">Už máš účet? <a href="#" onclick="document.querySelector('[data-tab=prihlasit]').click();return false;" style="color:var(--primary);font-weight:700;">Prihlás sa</a></p>
+    </div>
+
+    <div class="auth-back">
+      <a href="../index.html" class="btn btn-ghost btn-sm">← Späť na hlavnú stránku</a>
+    </div>
+  </div>
+</div>
+
+<script src="../js/script.js"></script>
+<script>initAuthPage();</script>
+</body>
+</html>
