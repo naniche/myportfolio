@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kern — Vizuálna akadémia grafického dizajnu</title>
+<meta name="description" content="Nauč sa grafický dizajn interaktívne, od úplných základov až po profesionálnu úroveň. 45 levelov, jeden cieľ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">K</span>
+      <span>Kern<span class="logo-sub">Vizuálna akadémia</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#kurz">Kurz</a>
+      <a href="#ako-to-funguje">Ako to funguje</a>
+      <a href="#kapitoly">Kapitoly</a>
+    </div>
+    <div class="nav-actions">
+      <a href="../pages/auth.html#prihlasit" class="btn btn-ghost">Prihlásiť sa</a>
+      <a href="../pages/auth.html#registrovat" class="btn btn-primary">Začať zadarmo</a>
+    </div>
+    <button class="nav-toggle" aria-label="Otvoriť menu" id="nav-toggle">☰</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="eyebrow"><span class="dot"></span> 45 levelov · 5 kapitol · učenie hrou</span>
+      <h1>Nauč sa vizuálny <span class="accent">dizajn</span> krok po kroku</h1>
+      <p class="hero-lede">Kern ťa prevedie od bodu a línie až po profesionálny branding a UI/UX — interaktívnymi lekciami, mikro-hádankami a okamžitou spätnou väzbou, presne v tvojom tempe.</p>
+      <div class="hero-actions">
+        <a href="../pages/auth.html#registrovat" class="btn btn-primary btn-lg">Začať sa učiť zadarmo</a>
+        <a href="#kapitoly" class="btn btn-secondary btn-lg">Pozrieť osnovu kurzu</a>
+      </div>
+      <div class="hero-meta">Bez kreditnej karty · Prvý level hneď po registrácii</div>
+    </div>
+
+    <div class="hero-stage" aria-hidden="true">
+      <div class="float-card glass fc-1 fc-kerning">
+        <div class="fc-label">Kerning</div>
+        <div class="kern-sample"><span class="k1">AV</span> <span class="k2">AV</span></div>
+      </div>
+      <div class="float-card glass fc-2 fc-contrast">
+        <div class="fc-label">WCAG kontrast</div>
+        <div class="fc-value">4.8 : 1</div>
+        <div class="swatch-row">
+          <span class="swatch" style="background:#11142b;color:#fff;">Aa</span>
+          <span class="swatch" style="background:#eef1fb;color:#11142b;">Aa</span>
+        </div>
+      </div>
+      <div class="float-card glass fc-3 fc-path">
+        <div class="fc-label">Tvoja cesta</div>
+        <div style="display:flex;gap:8px;margin-top:6px;">
+          <span class="node" style="background:#22c07a;">✓</span>
+          <span class="node" style="background:#3d5afe;">12</span>
+          <span class="node" style="background:#dfe3f2;color:#b6bcd8;">🔒</span>
+        </div>
+      </div>
+      <div class="float-card glass fc-4 fc-xp">
+        <div class="fc-icon">⚡</div>
+        <div>
+          <div class="fc-label">Získané XP</div>
+          <div class="fc-value">1 240</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="ako-to-funguje">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Ako to funguje</span>
+      <h2>Učenie, ktoré sa nezasekne v teórii</h2>
+      <p>Každý level kombinuje krátke vysvetlenie s praktickým cvičením — nastavíš kerning, doladíš kontrast alebo zoradíš hierarchiu skutočnými prvkami.</p>
+    </div>
+    <div class="benefit-grid">
+      <div class="glass benefit-card">
+        <div class="benefit-icon">🧭</div>
+        <h3>Vedená cesta</h3>
+        <p>Winding mapa levelov ťa prevedie presne stanoveným poradím — od úplných základov až po profesionálne zručnosti.</p>
+      </div>
+      <div class="glass benefit-card">
+        <div class="benefit-icon">🎛️</div>
+        <h3>Praktické hádanky</h3>
+        <p>Kerning posuvníky, kontrastné pomery, zoraďovanie hierarchie — princípy si osvojíš rukami, nie len čítaním.</p>
+      </div>
+      <div class="glass benefit-card">
+        <div class="benefit-icon">🔥</div>
+        <h3>Séria dní a XP</h3>
+        <p>Sleduj svoju sériu dní, zbieraj skúsenostné body a udržuj si motiváciu vďaka jasnému pocitu napredovania.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="kapitoly">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Osnova kurzu</span>
+      <h2>5 kapitol, 45 levelov</h2>
+      <p>Ucelená cesta od vizuálneho jazyka cez typografiu a farby až po layout a profesionálny branding.</p>
+    </div>
+    <div class="chapter-grid" id="kurz">
+      <div class="glass chapter-card" style="--accent:#3d5afe;">
+        <span class="chapter-num">Kapitola 1</span>
+        <h3>Základy vizuálneho jazyka</h3>
+        <p>Bod, línia, tvar, kompozícia, pravidlo tretín, vizuálna váha a rovnováha.</p>
+        <div class="lvl-count">Level 1 – 8</div>
+      </div>
+      <div class="glass chapter-card" style="--accent:#a557f0;">
+        <span class="chapter-num">Kapitola 2</span>
+        <h3>Písmo a typografia</h3>
+        <p>Anatómia písma, serify, kerning, tracking, riadkovanie a párovanie fontov.</p>
+        <div class="lvl-count">Level 9 – 17</div>
+      </div>
+      <div class="glass chapter-card" style="--accent:#22b3c0;">
+        <span class="chapter-num">Kapitola 3</span>
+        <h3>Farby a psychológia</h3>
+        <p>RGB vs. CMYK, harmonické palety, emócie vo farbách a WCAG prístupnosť.</p>
+        <div class="lvl-count">Level 18 – 26</div>
+      </div>
+      <div class="glass chapter-card" style="--accent:#f0a13f;">
+        <span class="chapter-num">Kapitola 4</span>
+        <h3>Mriežky a layout</h3>
+        <p>Zlatý rez, modulárne mriežky, vizuálna hierarchia, tlač vs. obrazovka.</p>
+        <div class="lvl-count">Level 27 – 36</div>
+      </div>
+      <div class="glass chapter-card" style="--accent:#f5567f;">
+        <span class="chapter-num">Kapitola 5</span>
+        <h3>Branding a UI/UX</h3>
+        <p>Logotypy, vizuálna identita, design systémy a základy použiteľnosti.</p>
+        <div class="lvl-count">Level 37 – 45</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Pripravený zvládnuť vizuálny jazyk?</h2>
+      <p>Registrácia trvá menej ako minútu. Prvý level ťa čaká hneď po prihlásení.</p>
+      <a href="../pages/auth.html#registrovat" class="btn btn-secondary btn-lg">Vytvoriť účet</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="logo">
+      <span class="logo-mark" style="width:30px;height:30px;font-size:15px;">K</span>
+      <span style="font-size:16px;">Kern</span>
+    </div>
+    <p>© 2026 Kern — Vizuálna akadémia. Všetky práva vyhradené.</p>
+  </div>
+</footer>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

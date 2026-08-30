@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lekcia — Kern</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<main class="lesson-shell">
+  <div class="wrap" style="max-width:720px;">
+    <div class="lesson-topbar">
+      <button class="close-btn" id="close-lesson" aria-label="Zavrieť lekciu">✕</button>
+      <div class="lesson-progress-track"><div class="lesson-progress-fill" id="lesson-progress-fill" style="width:0%;"></div></div>
+      <div class="lesson-hearts" id="lesson-hearts"></div>
+    </div>
+
+    <div id="lesson-root"></div>
+  </div>
+</main>
+
+<script src="../js/script.js"></script>
+<script>initLessonPage();</script>
+</body>
+</html>
