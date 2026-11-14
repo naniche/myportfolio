@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stránka nenájdená | Jozef Lavko</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+  .nf { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: var(--gutter); position: relative; z-index: 1; }
+  .nf__frame { position: relative; width: min(260px, 60vw); aspect-ratio: 9 / 16; margin: 0 auto 40px; border-radius: var(--r); overflow: hidden; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line), var(--glass-drop); }
+  .nf__frame::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(135deg, var(--tint) 0 1px, transparent 1px 10px); }
+  .nf__code { position: absolute; inset: 0; display: grid; place-items: center; font-size: 5rem; font-weight: 700; letter-spacing: -.05em; }
+  .nf h1 { font-size: var(--s-3); line-height: 1; letter-spacing: -.045em; margin-bottom: 16px; }
+  .nf p { margin: 0 auto 32px; max-width: 36ch; color: var(--ink-2); }
+</style>
+</head>
+<body>
+<div class="field" aria-hidden="true"><span class="bloom bloom--1"></span><span class="bloom bloom--2"></span><span class="grain"></span></div>
+<main class="nf">
+  <div>
+    <div class="nf__frame" aria-hidden="true"><span class="nf__code brand">404</span></div>
+    <h1 class="chrome">Tento formát neexistuje.</h1>
+    <p>Stránka, ktorú hľadáte, tu nie je. Možno bola presunutá alebo je v odkaze preklep.</p>
+    <a class="btn btn--white" href="/">Späť na úvod</a>
+  </div>
+</main>
+</body>
+</html>
