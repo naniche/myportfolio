@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Všetky práce | Jozef Lavko, grafický dizajnér a editor</title>
+<meta name="description" content="Všetky práce Jozefa Lavka na jednej mape: sociálne siete, reelsy, videá, plagáty, škola a farnosť.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#050507">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Všetky práce | Jozef Lavko">
+<link rel="canonical" href="https://jozeflavko.eu/prace.html">
+<meta property="og:url" content="https://jozeflavko.eu/prace.html">
+<meta property="og:image" content="https://jozeflavko.eu/og.png">
+<meta name="view-transition" content="same-origin">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="xp">
+
+<div class="field" aria-hidden="true">
+  <span class="bloom bloom--1"></span>
+  <span class="bloom bloom--2"></span>
+  <span class="bloom bloom--3"></span>
+  <span class="grain"></span>
+</div>
+
+<header class="xbar glass">
+  <a class="xbar__back" href="index.html#prace" aria-label="Späť na úvod"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span data-x="back">Späť</span></a>
+  <h1 class="xbar__title"><span data-x="title">Všetky práce</span> <span class="xbar__n" id="count"></span></h1>
+  <div class="xbar__filters" role="group" aria-label="Filter" id="filters"></div>
+  <div class="xbar__right">
+    <div class="xseg" role="group" aria-label="Zobrazenie">
+      <button type="button" class="xseg__b" data-view="map" aria-pressed="true" data-x="map">Mapa</button>
+      <button type="button" class="xseg__b" data-view="list" aria-pressed="false" data-x="list">Zoznam</button>
+    </div>
+    <div class="xseg" role="group" aria-label="Jazyk / Language">
+      <button type="button" class="xseg__b" data-lang="sk" aria-pressed="true">SK</button>
+      <button type="button" class="xseg__b" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="xmap" id="map" tabindex="0" aria-label="Mapa prác. Ťahajte do strán, šípky na klávesnici fungujú tiež.">
+    <div class="xworld" id="world"></div>
+  </div>
+  <div class="xlist" id="list" hidden></div>
+</main>
+
+<div class="xhint glass" id="hint" aria-hidden="true"><span class="xhint__dot"></span><span data-x="hint">Ťahajte do strán a kliknite na prácu</span></div>
+
+<dialog class="lb glass" id="lb" aria-labelledby="lbTitle">
+  <button class="icon-btn glass lb__close" type="button" id="lbClose" aria-label="Zavrieť"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="lb__stage" id="lbStage"></div>
+  <div class="lb__side">
+    <span class="lb__kind" id="lbKind"></span>
+    <h3 class="lb__title" id="lbTitle"></h3>
+    <p class="lb__client" id="lbClient"></p>
+    <p class="lb__text" id="lbText"></p>
+    <div class="lb__nav">
+      <button class="btn btn--glass glass" type="button" id="lbPrev" data-x="prev">Predošlá</button>
+      <button class="btn btn--glass glass" type="button" id="lbNext" data-x="next">Ďalšia</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="works.js"></script>
+<script src="explore.js"></script>
+</body>
+</html>

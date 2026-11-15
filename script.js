@@ -122,12 +122,12 @@
     });
     words = st.querySelectorAll('.wd');
   }
-  splitWords(st);
+  if (st) splitWords(st);
 
   /* =========================================================
      Scroll scenes
      ========================================================= */
-  var nav = document.getElementById('nav'), lastY = scrollY;
+  var nav = document.getElementById('nav'), lastY = scrollY, navIdle = 0, sheetOpen = false;
   var dock = document.getElementById('dock'), cta = document.getElementById('kontakt');
   var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
   cards.forEach(function (c) { var s = document.createElement('div'); s.className = 'card__shade'; c.appendChild(s); });
@@ -162,15 +162,22 @@
 
   function onScroll() {
     var y = scrollY;
-    nav.classList.toggle('is-hidden', y > lastY && y > 200);
+    if (!sheetOpen) {
+      if (y > lastY + 6 && y > 300) nav.classList.add('is-hidden');
+      else if (y < lastY - 2 || y < 300) nav.classList.remove('is-hidden');
+      clearTimeout(navIdle);
+      navIdle = setTimeout(function () { nav.classList.remove('is-hidden'); }, 700);
+    }
     lastY = y;
     dock.classList.toggle('is-on', y > innerHeight * 0.8 && cta.getBoundingClientRect().top > innerHeight * 0.7);
 
     // statement words
-    var r = st.getBoundingClientRect();
-    var p = Math.min(1, Math.max(0, (innerHeight * 0.75 - r.top) / (r.height + innerHeight * 0.3)));
-    var lit = Math.round(p * words.length);
-    for (var i = 0; i < words.length; i++) words[i].classList.toggle('on', i < lit);
+    if (st) {
+      var r = st.getBoundingClientRect();
+      var p = Math.min(1, Math.max(0, (innerHeight * 0.75 - r.top) / (r.height + innerHeight * 0.3)));
+      var lit = Math.round(p * words.length);
+      for (var i = 0; i < words.length; i++) words[i].classList.toggle('on', i < lit);
+    }
 
     // stacking cards: the one underneath shrinks and darkens
     for (var k = 0; k < cards.length - 1; k++) {
@@ -182,10 +189,13 @@
     }
 
     // morphing format frame
-    var mp = progress(morph);
-    setMorph(Math.min(mList.length - 1, Math.floor(mp * mList.length * 0.999)));
+    if (morph && mList.length) {
+      var mp = progress(morph);
+      setMorph(Math.min(mList.length - 1, Math.floor(mp * mList.length * 0.999)));
+    }
 
     // edit timeline
+    if (!tl) return;
     var tp = progress(tl);
     head.style.setProperty('--p', (tp * track.clientWidth) + 'px');
     var frames = Math.round(tp * 24 * 30), s = Math.floor(frames / 24), f = frames % 24;
@@ -260,12 +270,12 @@
     lbKind.textContent = w.k[L()];
     lbTitle.textContent = w.t[L()];
     lbClient.hidden = false;
-    lbClient.textContent = w.c ? t('lb.client') + ': ' + w.c : t('free');
+    lbClient.textContent = w.c ? t('lb.client') + ': ' + w.c : (w.anon ? t('anon') : t('free'));
     if (!w.c && id === 'showreel') lbClient.hidden = true;
     lbText.textContent = w.x[L()];
   }
   function openFrom(f) {
-    var box = f.closest('.card__media') || f.closest('.hero__frames') || f.closest('.gallery');
+    var box = f.closest('.card__media') || f.closest('.hero__frames') || f.closest('.strip') || f.closest('.bd') || f.closest('.gallery');
     group = box ? Array.prototype.slice.call(box.querySelectorAll('button.frame')).filter(function (b) {
       var it = b.closest('.g-item'); return !(it && it.hidden);
     }) : [f];
@@ -293,7 +303,7 @@
     v.play().then(function () { f.classList.add('is-playing'); }).catch(function () {});
   }
   function stopV(f) { var v = f.querySelector('.fm--v'); if (!v) return; v.pause(); f.classList.remove('is-playing'); }
-  var vFrames = frames.filter(function (f) { return f.querySelector('.fm--v') && !f.classList.contains('showreel__frame'); });
+  var vFrames = frames.filter(function (f) { return f.querySelector('.fm--v') && !f.classList.contains('showreel__frame') && !f.closest('.bd'); });
   if (fine) {
     vFrames.forEach(function (f) {
       f.addEventListener('mouseenter', function () { playV(f); });
@@ -378,16 +388,16 @@
      ========================================================= */
   var T = {
     sk: {
-      'nav.work': 'Práce', 'nav.services': 'Čo robím', 'nav.reviews': 'Recenzie', 'nav.about': 'O mne', 'nav.cta': 'Napíšte mi',
+      'nav.work': 'Práce', 'nav.camp': 'Kampaň', 'nav.services': 'Čo robím', 'nav.reviews': 'Recenzie', 'nav.about': 'O mne', 'nav.cta': 'Napíšte mi',
       'hero.l1': 'Dizajn, ktorý nepreskrolujete.', 'hero.l2': 'A videá, ktoré dopozeráte.',
       'hero.lede': 'Som Jozef Lavko, grafický dizajnér a editor z Popradu. Navrhujem grafiku na sociálne siete, kampane a plagáty a strihám reelsy, videá a reklamy.',
       'hero.b1': 'Pozrieť práce', 'hero.b2': 'Pustiť showreel',
       'statement': 'Dobrý vizuál nestojí na jednom formáte. Stojí na nápade, ktorý funguje v mobile, na plagáte aj vo videu. Cieľ je vždy rovnaký: <em>aby si to ľudia všimli.</em>',
       'reel.note': 'Najlepšie strihy v jednom videu.', 'reel.play': 'Pustiť showreel',
       'reel.text': 'Sem príde váš showreel: 20 až 30 sekúnd najlepších strihov.',
-      'work.h': 'Práce', 'work.note': 'Výber z projektov pre značky, agentúry, školu a farnosť. Všetko ostatné nájdete nižšie.',
-      'c1.h': 'Sociálne siete a kampane', 'c1.p': 'Posty, carousely a stories v jednom vizuálnom štýle naprieč celou kampaňou.',
-      'c2.h': 'Reelsy, videá a reklamy', 'c2.p': 'Strih, titulky a motion grafika pre videá, ktoré udržia pozornosť.',
+      'work.h': 'Práce', 'work.note': 'Posty, reelsy a plagáty pre značky, agentúru a školu. Kliknite na ktorúkoľvek prácu.',
+      'c1.h': 'Posty', 'c1.p': 'Posty, carousely a stories, ktoré držia jeden štýl naprieč celou značkou.',
+      'c2.h': 'Reelsy', 'c2.p': 'Strih, titulky a pohyb. Krátke videá, ktoré ľudia dopozerajú aj bez zvuku.',
       'c3.h': 'Plagáty', 'c3.p': 'Pre tlač aj obrazovku, od typografie po finálny súbor.',
       'p.posts': 'Posty', 'p.carousels': 'Carousely', 'p.ads': 'Reklamy', 'p.edit': 'Strih', 'p.print': 'Tlač', 'p.type': 'Typografia', 'p.screen': 'Obrazovka',
       'ba.h': 'Pred a po', 'ba.note': 'Potiahnite posuvník a uvidíte, čo z podkladu urobím.', 'ba.raw': 'Surový záber', 'ba.done': 'Hotový výsledok',
@@ -412,7 +422,8 @@
       'about.p3': 'Popri tom robím aj weby, napríklad <a href="https://chcemvodicak.sostpoprad.sk" target="_blank" rel="noopener" data-cursor="link">ChcemVodicak</a>.',
       'about.study': 'Štúdium', 'about.studyv': 'Grafik digitálnych médií, SOŠ technická Poprad, 2024 – 2028', 'about.city': 'Mesto',
       'about.cv': 'Stiahnuť CV', 'about.photo': 'Vaša fotka',
-      'cl.h': 'Spolupracoval som s', 'gal.h': 'Všetky práce', 'gal.note': 'Kliknite na prácu a otvorí sa vo väčšom.', 'gal.all': 'Všetko', 'gal.social': 'Sociálne siete', 'gal.video': 'Videá', 'gal.poster': 'Plagáty', 'gal.school': 'Škola', 'gal.parish': 'Farnosť', 'free': 'Voľná tvorba', 'cta.call': 'Rezervovať 15 min hovor',
+      'menu': 'Menu', 'nav.contact': 'Kontakt', 'more.h': 'Ďalšie práce', 'more.all': 'Všetky práce', 'more.end': 'prác na mape. Ťahajte, klikajte, objavujte.', 'case.h': 'Jedna značka, každý formát', 'case.p': 'Gimber, zázvorový koncentrát z e-shopu Nontoxic. Rovnaká značka v reeloch, postoch aj na plagáte. Prepnite formát a pozrite sa.', 'pk.h': 'Spolupráca', 'pk.note': 'Tri spôsoby spolupráce. Cenu vám pripravím podľa rozsahu.', 'pk.1h': 'Sociálne siete na mesiac', 'pk.1p': 'Starám sa o vaše sociálne siete v jednom vizuálnom štýle.', 'pk.1a': 'Posty a carousely', 'pk.1b': 'Stories', 'pk.1c': 'Reelsy', 'pk.1d': 'Plán na celý mesiac', 'pk.2h': 'Kampaň', 'pk.2p': 'Jeden hlavný vizuál a z neho všetky formáty, ktoré kampaň potrebuje.', 'pk.2a': 'Kľúčový vizuál', 'pk.2b': 'Posty, stories a reel', 'pk.2c': 'Plagát alebo banner', 'pk.2d': 'Súbory pre každú platformu', 'pk.3h': 'Podujatie', 'pk.3p': 'Všetko, čo potrebujete, aby ľudia o vašej akcii vedeli.', 'pk.3a': 'Plagát do tlače', 'pk.3b': 'Posty a stories', 'pk.3c': 'Pozvánka vo videu', 'pk.3d': 'Zostrih po akcii', 'pk.cta': 'Napíšte mi, čo potrebujete', 'camp.h': 'Celá kampaň od jedného človeka', 'camp.p': 'Doplnky výživy Laveen pre e-shop Nontoxic. Dva koncepty, reklamy pre Metu aj Google a videá, všetko pripravené na spustenie.', 'camp.s1': 'koncepty', 'camp.s2': 'vizuálov', 'camp.s3': 'videí', 'camp.s4': 'platformy', 'camp.a': 'Produkt a zloženie', 'camp.b': 'Rodinný život', 'camp.all': 'Celá kampaň na mape', 'copy': 'Kopírovať', 'copied': 'E-mail skopírovaný', 'totop': 'Späť hore',
+      'cl.h': 'Spolupracoval som s', 'anon': 'Klientska práca', 'gal.h': 'Všetky práce', 'gal.note': 'Kliknite na prácu a otvorí sa vo väčšom.', 'gal.all': 'Všetko', 'gal.social': 'Sociálne siete', 'gal.video': 'Videá', 'gal.poster': 'Plagáty', 'gal.school': 'Škola', 'gal.parish': 'Farnosť', 'free': 'Voľná tvorba', 'cta.call': 'Rezervovať 15 min hovor',
       'cta.h1': 'Máte projekt?', 'cta.h2': 'Napíšte mi.', 'cta.p': 'Grafika alebo video, zákazka alebo spolupráca. Pošlite pár viet a ozvem sa.',
       'f.name': 'Meno', 'f.email': 'E-mail', 'f.need': 'Čo potrebujete', 'f.msg': 'Správa', 'f.send': 'Odoslať správu',
       'f.c1': 'Sociálne siete', 'f.c2': 'Kampaň', 'f.c3': 'Plagát', 'f.c4': 'Reel alebo video', 'f.c5': 'Reklama', 'f.c6': 'Iné',
@@ -425,16 +436,16 @@
       'title': 'Jozef Lavko, grafický dizajnér a editor'
     },
     en: {
-      'nav.work': 'Work', 'nav.services': 'Services', 'nav.reviews': 'Reviews', 'nav.about': 'About', 'nav.cta': 'Get in touch',
+      'nav.work': 'Work', 'nav.camp': 'Campaign', 'nav.services': 'Services', 'nav.reviews': 'Reviews', 'nav.about': 'About', 'nav.cta': 'Get in touch',
       'hero.l1': 'Design you won’t scroll past.', 'hero.l2': 'And videos you’ll watch to the end.',
       'hero.lede': 'I’m Jozef Lavko, a graphic designer and video editor from Poprad, Slovakia. I design social media graphics, campaigns and posters, and edit reels, videos and ads.',
       'hero.b1': 'See work', 'hero.b2': 'Play showreel',
       'statement': 'Good design doesn’t depend on one format. It depends on an idea that works on a phone, on a poster and in a video. The goal is always the same: <em>make people notice.</em>',
       'reel.note': 'My best edits in one video.', 'reel.play': 'Play showreel',
       'reel.text': 'Your showreel goes here: 20 to 30 seconds of your best edits.',
-      'work.h': 'Work', 'work.note': 'Selected projects for brands, agencies, my school and a parish. Everything else is below.',
-      'c1.h': 'Social media and campaigns', 'c1.p': 'Posts, carousels and stories in one visual style across the whole campaign.',
-      'c2.h': 'Reels, video and ads', 'c2.p': 'Editing, captions and motion graphics for videos that hold attention.',
+      'work.h': 'Work', 'work.note': 'Posts, reels and posters for brands, an agency and my school. Click any piece.',
+      'c1.h': 'Posts', 'c1.p': 'Posts, carousels and stories that keep one style across the whole brand.',
+      'c2.h': 'Reels', 'c2.p': 'Editing, captions and motion. Short videos people watch to the end, even on mute.',
       'c3.h': 'Posters', 'c3.p': 'For print and screen, from typography to the final file.',
       'p.posts': 'Posts', 'p.carousels': 'Carousels', 'p.ads': 'Ads', 'p.edit': 'Editing', 'p.print': 'Print', 'p.type': 'Typography', 'p.screen': 'Screen',
       'ba.h': 'Before and after', 'ba.note': 'Drag the slider to see what I make from the raw material.', 'ba.raw': 'Raw footage', 'ba.done': 'Final result',
@@ -459,7 +470,8 @@
       'about.p3': 'On the side I also build websites, such as <a href="https://chcemvodicak.sostpoprad.sk" target="_blank" rel="noopener" data-cursor="link">ChcemVodicak</a>.',
       'about.study': 'Studies', 'about.studyv': 'Digital Media Graphics, Secondary Technical School Poprad, 2024 – 2028', 'about.city': 'Based in',
       'about.cv': 'Download CV', 'about.photo': 'Your photo',
-      'cl.h': 'Worked with', 'gal.h': 'All work', 'gal.note': 'Click any piece to open it larger.', 'gal.all': 'All', 'gal.social': 'Social media', 'gal.video': 'Video', 'gal.poster': 'Posters', 'gal.school': 'School', 'gal.parish': 'Parish', 'free': 'Personal work', 'cta.call': 'Book a 15-minute call',
+      'menu': 'Menu', 'nav.contact': 'Contact', 'more.h': 'More work', 'more.all': 'All work', 'more.end': 'pieces on the map. Drag, click, explore.', 'case.h': 'One brand, every format', 'case.p': 'Gimber, a ginger concentrate sold by Nontoxic. The same brand across reels, posts and a poster. Switch the format and see.', 'pk.h': 'Working together', 'pk.note': 'Three ways to work together. I will price it to the scope.', 'pk.1h': 'Social media, monthly', 'pk.1p': 'I take care of your social media in one visual style.', 'pk.1a': 'Posts and carousels', 'pk.1b': 'Stories', 'pk.1c': 'Reels', 'pk.1d': 'A plan for the whole month', 'pk.2h': 'Campaign', 'pk.2p': 'One key visual and every format the campaign needs.', 'pk.2a': 'Key visual', 'pk.2b': 'Posts, stories and a reel', 'pk.2c': 'Poster or banner', 'pk.2d': 'Files for every platform', 'pk.3h': 'Event', 'pk.3p': 'Everything you need so people know about your event.', 'pk.3a': 'Print poster', 'pk.3b': 'Posts and stories', 'pk.3c': 'Video invite', 'pk.3d': 'Recap edit after the event', 'pk.cta': 'Tell me what you need', 'camp.h': 'A whole campaign, one person', 'camp.p': 'Laveen supplements for the Nontoxic online store. Two concepts, ads for Meta and Google, and videos, all ready to launch.', 'camp.s1': 'concepts', 'camp.s2': 'visuals', 'camp.s3': 'videos', 'camp.s4': 'platforms', 'camp.a': 'Product and ingredients', 'camp.b': 'Family life', 'camp.all': 'The whole campaign on the map', 'copy': 'Copy', 'copied': 'Email copied', 'totop': 'Back to top',
+      'cl.h': 'Worked with', 'anon': 'Client work', 'gal.h': 'All work', 'gal.note': 'Click any piece to open it larger.', 'gal.all': 'All', 'gal.social': 'Social media', 'gal.video': 'Video', 'gal.poster': 'Posters', 'gal.school': 'School', 'gal.parish': 'Parish', 'free': 'Personal work', 'cta.call': 'Book a 15-minute call',
       'cta.h1': 'Got a project?', 'cta.h2': 'Get in touch.', 'cta.p': 'Design or video, one-off or ongoing. Send a few lines and I’ll get back to you.',
       'f.name': 'Name', 'f.email': 'Email', 'f.need': 'What you need', 'f.msg': 'Message', 'f.send': 'Send message',
       'f.c1': 'Social media', 'f.c2': 'Campaign', 'f.c3': 'Poster', 'f.c4': 'Reel or video', 'f.c5': 'Ad', 'f.c6': 'Other',
@@ -485,7 +497,7 @@
     document.querySelectorAll('[data-i]').forEach(function (el) { setText(el, t(el.dataset.i)); });
     document.querySelectorAll('[data-ih]').forEach(function (el) { el.innerHTML = t(el.dataset.ih); });
     document.querySelectorAll('[data-wt]').forEach(function (el) { var w = WK[el.dataset.wt]; if (w) el.textContent = w.t[lang === 'en' ? 1 : 0]; });
-    document.querySelectorAll('[data-wc]').forEach(function (el) { var w = WK[el.dataset.wc]; if (w && !w.c) el.textContent = t('free'); });
+    document.querySelectorAll('[data-wc]').forEach(function (el) { var w = WK[el.dataset.wc]; if (w && !w.c) el.textContent = w.anon ? t('anon') : t('free'); });
     splitWords(st);
     mList.forEach(function (li, n) { li.dataset.use = t('svc.' + (n + 1) + 'u'); });
     mIdx = -1; setMorph(Math.max(0, Array.prototype.findIndex.call(mList, function (li) { return li.classList.contains('is-on'); })));
@@ -525,4 +537,147 @@
       });
     });
   }
+
+  /* =========================================================
+     v7: menu sheet, strip drag, format switcher, copy, swipe,
+     peek, easter egg
+     ========================================================= */
+  var menuBtn = document.getElementById('menuBtn'), sheet = document.getElementById('sheet');
+  function openSheet() {
+    sheet.hidden = false; sheetOpen = true;
+    requestAnimationFrame(function () { sheet.classList.add('is-open'); });
+    menuBtn.setAttribute('aria-expanded', 'true');
+    nav.classList.remove('is-hidden');
+    var first = sheet.querySelector('a'); if (first) first.focus({ preventScroll: true });
+  }
+  function closeSheet() {
+    sheet.classList.remove('is-open'); sheetOpen = false;
+    menuBtn.setAttribute('aria-expanded', 'false');
+    setTimeout(function () { if (!sheetOpen) sheet.hidden = true; }, 350);
+  }
+  if (menuBtn && sheet) {
+    menuBtn.addEventListener('click', function () { sheetOpen ? closeSheet() : openSheet(); });
+    sheet.addEventListener('click', function (e) { if (e.target === sheet || e.target.closest('a')) closeSheet(); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape' && sheetOpen) { closeSheet(); menuBtn.focus(); } });
+  }
+
+  /* strip: drag sideways with the mouse */
+  var strip = document.getElementById('strip');
+  if (strip && fine) {
+    var sx0 = 0, sl0 = 0, down = false, moved = false;
+    strip.addEventListener('mousedown', function (e) { down = true; moved = false; sx0 = e.clientX; sl0 = strip.scrollLeft; });
+    addEventListener('mousemove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - sx0;
+      if (Math.abs(dx) > 6) { moved = true; strip.classList.add('is-drag'); }
+      if (moved) strip.scrollLeft = sl0 - dx;
+    });
+    addEventListener('mouseup', function () {
+      if (!down) return; down = false;
+      setTimeout(function () { strip.classList.remove('is-drag'); }, 0);
+    });
+    strip.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  }
+
+  /* campaign: switch concept A / B, play what is on screen */
+  var campTabs = document.querySelectorAll('.camp__tab'), boardWrap = document.querySelector('.camp__board'), campVisible = false;
+  function boardFrames(c) { var bd = document.querySelector('.bd[data-c="' + c + '"]'); return bd ? Array.prototype.slice.call(bd.querySelectorAll('button.frame')) : []; }
+  function campPlay() {
+    var cur = (document.querySelector('.camp__tab[aria-pressed="true"]') || {}).dataset;
+    ['a', 'b'].forEach(function (c) { boardFrames(c).forEach(function (f) { (campVisible && cur && cur.c === c) ? playV(f) : stopV(f); }); });
+  }
+  function setConcept(c) {
+    campTabs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.c === c ? 'true' : 'false'); });
+    document.querySelectorAll('.bd').forEach(function (bd) {
+      var on = bd.dataset.c === c;
+      if (on) { bd.hidden = false; bd.classList.remove('is-in'); void bd.offsetWidth; bd.classList.add('is-in'); }
+      else bd.hidden = true;
+    });
+    if (boardWrap) boardWrap.dataset.c = c;
+    campPlay();
+  }
+  campTabs.forEach(function (b) { b.addEventListener('click', function () { setConcept(b.dataset.c); }); });
+  if (boardWrap) {
+    var firstBd = boardWrap.querySelector('.bd'); if (firstBd) firstBd.classList.add('is-in');
+    boardWrap.dataset.c = 'a';
+    if ('IntersectionObserver' in window && !reduce) {
+      new IntersectionObserver(function (es) { campVisible = es[0].isIntersecting; campPlay(); }, { threshold: 0.25 }).observe(boardWrap);
+    }
+  }
+
+  /* copy e-mail */
+  var toast = document.createElement('div'); toast.className = 'toast glass'; toast.setAttribute('role', 'status'); document.body.appendChild(toast);
+  function say(msg) { toast.textContent = msg; toast.classList.add('is-on'); clearTimeout(say.t); say.t = setTimeout(function () { toast.classList.remove('is-on'); }, 1800); }
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var v = b.dataset.copy;
+      var done = function () { say(t('copied')); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done).catch(function () { fallbackCopy(v); done(); });
+      else { fallbackCopy(v); done(); }
+    });
+  });
+  function fallbackCopy(v) {
+    var ta = document.createElement('textarea'); ta.value = v; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove();
+  }
+
+  /* detail: swipe sideways for next, swipe down to close */
+  var tsx = 0, tsy = 0;
+  lb.addEventListener('touchstart', function (e) { tsx = e.touches[0].clientX; tsy = e.touches[0].clientY; }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - tsx, dy = e.changedTouches[0].clientY - tsy;
+    if (e.target.closest('video') && Math.abs(dx) < 40 && Math.abs(dy) < 40) return;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) lb.close();
+  }, { passive: true });
+
+  /* peek: hold a finger on a work to see it big, let go to hide */
+  if (!fine) {
+    var peek = document.createElement('div'); peek.className = 'peek'; peek.setAttribute('aria-hidden', 'true'); document.body.appendChild(peek);
+    var holdT = 0, peeking = false;
+    document.querySelectorAll('button.frame[data-id]').forEach(function (f) {
+      f.addEventListener('touchstart', function () {
+        holdT = setTimeout(function () {
+          var w = WK[f.dataset.id]; if (!w) return;
+          peeking = true; peek.innerHTML = '';
+          var el;
+          if (w.type === 'video') { el = document.createElement('video'); el.src = w.src; el.muted = true; el.loop = true; el.playsInline = true; el.autoplay = true; }
+          else { el = new Image(); el.src = w.slides ? w.slides[0] : w.src; }
+          peek.appendChild(el); peek.classList.add('is-on');
+          if (navigator.vibrate) navigator.vibrate(10);
+        }, 420);
+      }, { passive: true });
+      var end = function (e) {
+        clearTimeout(holdT);
+        if (peeking) { if (e && e.cancelable) e.preventDefault(); peek.classList.remove('is-on'); setTimeout(function () { peek.innerHTML = ''; }, 250); }
+      };
+      f.addEventListener('touchend', end);
+      f.addEventListener('touchmove', function () { clearTimeout(holdT); }, { passive: true });
+      f.addEventListener('click', function (e) { if (peeking) { peeking = false; e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+      f.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    });
+  }
+
+  /* easter egg: type "gimber" */
+  var typed = '';
+  addEventListener('keydown', function (e) {
+    if (e.target.closest && e.target.closest('input, textarea')) return;
+    typed = (typed + (e.key || '')).slice(-6).toLowerCase();
+    if (typed === 'gimber' && !reduce) {
+      var rain = document.createElement('div'); rain.className = 'rain'; rain.setAttribute('aria-hidden', 'true');
+      var pics = ['media/gimber-zima.webp', 'media/gimber-pernik.webp', 'media/gimber-plagat.webp', 'media/gimber-istota.webp', 'media/gimber-100.webp', 'media/gimber-chatgpt.webp'];
+      for (var n = 0; n < 16; n++) {
+        var im = new Image(); im.src = pics[n % pics.length]; im.alt = '';
+        im.style.left = (Math.random() * 92) + 'vw';
+        im.style.setProperty('--d', (1.8 + Math.random() * 1.6).toFixed(2) + 's');
+        im.style.setProperty('--r', (Math.random() * 120 - 60).toFixed(0) + 'deg');
+        im.style.animationDelay = (Math.random() * 0.8).toFixed(2) + 's';
+        rain.appendChild(im);
+      }
+      document.body.appendChild(rain);
+      say('Na zdravie!');
+      setTimeout(function () { rain.remove(); }, 4200);
+    }
+  });
+
 })();

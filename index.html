@@ -3,24 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jozef Lavko, grafický dizajnér a editor</title>
-<meta name="description" content="Grafický dizajnér a editor z Popradu. Grafika na sociálne siete, kampane, plagáty, reelsy, videá a reklamy.">
+<title>Jozef Lavko, grafický dizajnér a editor, Poprad</title>
+<meta name="description" content="Jozef Lavko, grafický dizajnér a editor z Popradu. Grafika na sociálne siete, kampane, plagáty, reelsy, strih videí a reklamy pre značky, agentúry a podujatia.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#050507">
-<!-- Náhľad pri zdieľaní odkazu. Keď bude web na doméne, zmeňte og:image a og:url na celú adresu, napr. https://jozeflavko.eu/og.png -->
+<link rel="canonical" href="https://jozeflavko.eu/">
+<meta property="og:url" content="https://jozeflavko.eu/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jozef Lavko, grafický dizajnér a editor">
 <meta property="og:description" content="Dizajn, ktorý nepreskrolujete. A videá, ktoré dopozeráte. Grafika na sociálne siete, kampane, plagáty, reelsy, videá a reklamy.">
-<meta property="og:image" content="og.png">
+<meta property="og:image" content="https://jozeflavko.eu/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="sk_SK">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jozeflavko.eu/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Jozef Lavko","url":"https://jozeflavko.eu/","image":"https://jozeflavko.eu/og.png","jobTitle":"Grafický dizajnér a editor","email":"mailto:jozeflavko3@gmail.com","telephone":"+421948018616","address":{"@type":"PostalAddress","addressLocality":"Poprad","addressCountry":"SK"},"sameAs":["https://www.instagram.com/josk0/"],"knowsAbout":["Grafický dizajn","Sociálne siete","Strih videa","Reels","Plagáty"],"alumniOf":{"@type":"EducationalOrganization","name":"SOŠ technická Poprad"}}</script>
+<meta name="view-transition" content="same-origin">
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.classList.add('js')</script>
 <!-- Návštevnosť: keď si založíte účet na plausible.io, odkomentujte riadok nižšie a doplňte svoju doménu.
@@ -52,9 +56,9 @@
   <nav class="nav__pill glass" aria-label="Menu">
     <a class="nav__name" href="#top" data-cursor="link"><span class="mark">JL</span><span>Jozef Lavko</span></a>
     <div class="nav__links">
-      <a href="#prace" data-cursor="link" data-i="nav.work">Práce</a>
       <a href="#robim" data-cursor="link" data-i="nav.services">Čo robím</a>
-      <a href="#recenzie" data-cursor="link" data-i="nav.reviews">Recenzie</a>
+      <a href="#prace" data-cursor="link" data-i="nav.work">Práce</a>
+      <a href="#kampan" data-cursor="link" data-i="nav.camp">Kampaň</a>
       <a href="#o-mne" data-cursor="link" data-i="nav.about">O mne</a>
     </div>
     <div class="lang" role="group" aria-label="Jazyk / Language">
@@ -62,8 +66,36 @@
       <button type="button" class="lang__b" data-lang="en" aria-pressed="false" data-cursor="link">EN</button>
     </div>
     <a class="btn btn--white btn--sm nav__cta" href="#kontakt" data-cursor="link" data-i="nav.cta">Napíšte mi</a>
+    <button type="button" class="nav__menu" id="menuBtn" aria-expanded="false" aria-controls="sheet" data-cursor="link"><span class="nav__burger" aria-hidden="true"><i></i><i></i></span><span data-i="menu">Menu</span></button>
   </nav>
 </header>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet__panel glass" role="dialog" aria-modal="true" aria-label="Menu">
+    <nav class="sheet__links" aria-label="Menu">
+      <a href="#robim" data-i="nav.services">Čo robím</a>
+      <a href="#postup" data-i="proc.h">Postup</a>
+      <a href="#prace" data-i="nav.work">Práce</a>
+      <a href="prace.html" data-i="more.all">Všetky práce</a>
+      <a href="#kampan" data-i="nav.camp">Kampaň</a>
+      <a href="#recenzie" data-i="nav.reviews">Recenzie</a>
+      <a href="#o-mne" data-i="nav.about">O mne</a>
+      <a href="#kontakt" data-i="nav.contact">Kontakt</a>
+    </nav>
+    <div class="sheet__row">
+      <div class="lang" role="group" aria-label="Jazyk / Language">
+        <button type="button" class="lang__b" data-lang="sk" aria-pressed="true">SK</button>
+        <button type="button" class="lang__b" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn--glass glass btn--sm" href="cv.pdf" data-i="about.cv">Stiahnuť CV</a>
+    </div>
+    <div class="sheet__contacts">
+      <a class="btn btn--white" href="mailto:jozeflavko3@gmail.com">E-mail</a>
+      <a class="btn btn--glass glass" href="https://wa.me/421948018616" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn btn--glass glass" href="https://www.instagram.com/josk0/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</div>
 
 <main id="top">
 
@@ -82,264 +114,13 @@
       </div>
     </div>
     <div class="hero__frames">
-      <span class="drift drift--a w-34"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-istota"><img class="fm" src="media/gimber-istota.webp" width="1080" height="1440" alt="Gimber, Tvoja istota v každom zápase" decoding="async"><span class="tag glass">Post</span></button></span>
-      <span class="drift drift--b w-916"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="gimber-100"><img class="fm" src="media/gimber-100.webp" width="540" height="960" alt="Gimber, 100 % prírodné" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/gimber-100.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button></span>
-      <span class="drift drift--c w-a"><button type="button" class="frame frame--a has-media" data-cursor="media" data-id="dod"><img class="fm" src="media/dod-modry.webp" width="1061" height="1500" alt="Deň otvorených dverí 2026" decoding="async"><span class="count glass">1 / 2</span><span class="tag glass">Plagát</span></button></span>
-      <span class="drift drift--d w-916"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="tenori-pozvanka"><img class="fm" src="media/tenori-pozvanka.webp" width="540" height="960" alt="4 Tenori, pozvánka" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/tenori-pozvanka.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button></span>
-      <span class="drift drift--e w-34"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="laveen-meno-post"><img class="fm" src="media/laveen-meno-post.webp" width="1080" height="1440" alt="Laveen, Menopauza pod kontrolou" decoding="async"><span class="tag glass">Post</span></button></span>
-    </div>
-  </section>
-
-  <!-- ============ CLIENTS ============ -->
-  <section class="clients" aria-labelledby="cl-h">
-    <div class="wrap clients__in">
-      <h2 id="cl-h" class="clients__h" data-i="cl.h">Spolupracoval som s</h2>
-      <ul class="clients__list">
-        <li><img src="logos/nontoxic.svg" alt="Nontoxic" onerror="this.remove()"><span>Nontoxic</span></li>
-        <li><img src="logos/keyart.svg" alt="Key Art" onerror="this.remove()"><span>Key Art</span></li>
-        <li><img src="logos/sost.svg" alt="SOŠ technická Poprad" onerror="this.remove()"><span>SOŠT Poprad</span></li>
-        <li><img src="logos/rkc.svg" alt="RKC Poprad-Juh" onerror="this.remove()"><span>RKC Poprad-Juh</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ STATEMENT ============ -->
-  <section class="statement" aria-label="Statement">
-    <div class="wrap">
-      <p class="statement__text" id="statement" data-ih="statement">Dobrý vizuál nestojí na jednom formáte. Stojí na nápade, ktorý funguje v mobile, na plagáte aj vo videu. Cieľ je vždy rovnaký: <em>aby si to ľudia všimli.</em></p>
-    </div>
-  </section>
-
-  <!-- ============ SHOWREEL ============ -->
-  <section class="showreel" id="showreel" aria-labelledby="reel-h">
-    <div class="wrap">
-      <div class="head">
-        <h2 id="reel-h" class="chrome reveal">Showreel</h2>
-        <p class="head__note reveal" data-i="reel.note">Najlepšie strihy v jednom videu.</p>
-      </div>
-      <button type="button" class="frame frame--169 has-media showreel__frame reveal" data-cursor="media" data-id="showreel"><img class="fm" src="media/showreel.webp" width="1280" height="720" alt="Showreel" loading="lazy"><video class="fm fm--v fm--auto" muted loop playsinline preload="none" data-src="media/showreel.mp4" aria-hidden="true"></video><span class="showreel__play glass"><span class="play-ico" aria-hidden="true"></span><span data-i="reel.play">Pustiť showreel</span></span><span class="tag glass">0:22</span></button>
-    </div>
-  </section>
-
-  <!-- ============ WORK ============ -->
-  <section class="work" id="prace" aria-labelledby="prace-h">
-    <div class="wrap">
-      <div class="head">
-        <h2 id="prace-h" class="chrome reveal" data-i="work.h">Práce</h2>
-        <p class="head__note reveal" data-i="work.note">Výber z projektov pre značky, agentúry, školu a farnosť. Všetko ostatné nájdete nižšie.</p>
-      </div>
-    </div>
-    <div class="stack wrap">
-      <article class="card glass">
-        <div class="card__media card__media--c1">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="gimber-chatgpt"><img class="fm" src="media/gimber-chatgpt.webp" width="540" height="960" alt="Gimber, ChatGPT" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/gimber-chatgpt.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button>
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-zima"><img class="fm" src="media/gimber-zima.webp" width="1080" height="1440" alt="Gimber, Je ti zima?" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="jack"><img class="fm" src="media/jack-1.webp" width="1080" height="1440" alt="Captain Jack, booking carousel" loading="lazy" decoding="async"><span class="count glass">1 / 4</span><span class="tag glass">Carousel</span></button>
-        </div>
-        <div class="card__cap">
-          <span class="card__no">01</span>
-          <h3 data-i="c1.h">Sociálne siete a kampane</h3>
-          <p data-i="c1.p">Posty, carousely a stories v jednom vizuálnom štýle naprieč celou kampaňou.</p>
-          <ul class="pills"><li data-i="p.posts">Posty</li><li data-i="p.carousels">Carousely</li><li>Stories</li></ul>
-        </div>
-      </article>
-      <article class="card glass">
-        <div class="card__media card__media--c2">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="kraus-jarne"><img class="fm" src="media/kraus-jarne.webp" width="540" height="960" alt="Jan Kraus, Jarné turné 2027" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/kraus-jarne.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button>
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="laveen-meno"><img class="fm" src="media/laveen-meno.webp" width="540" height="960" alt="Laveen, Peri Meno Balans" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/laveen-meno.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button>
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="rkc-den"><img class="fm" src="media/rkc-den.webp" width="540" height="960" alt="Deň farnosti 2026" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/rkc-den.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button>
-        </div>
-        <div class="card__cap">
-          <span class="card__no">02</span>
-          <h3 data-i="c2.h">Reelsy, videá a reklamy</h3>
-          <p data-i="c2.p">Strih, titulky a motion grafika pre videá, ktoré udržia pozornosť.</p>
-          <ul class="pills"><li>Reels</li><li data-i="p.ads">Reklamy</li><li data-i="p.edit">Strih</li></ul>
-        </div>
-      </article>
-      <article class="card glass">
-        <div class="card__media card__media--c3">
-          <button type="button" class="frame frame--a has-media" data-cursor="media" data-id="dod"><img class="fm" src="media/dod-modry.webp" width="1061" height="1500" alt="Deň otvorených dverí 2026" loading="lazy" decoding="async"><span class="count glass">1 / 2</span><span class="tag glass">Plagát</span></button>
-          <button type="button" class="frame frame--a has-media" data-cursor="media" data-id="anjel"><img class="fm" src="media/anjel.webp" width="1060" height="1500" alt="Anjel Vianoc 2026" loading="lazy" decoding="async"><span class="tag glass">Plagát</span></button>
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-plagat"><img class="fm" src="media/gimber-plagat.webp" width="1080" height="1440" alt="Gimber, plagát" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-        </div>
-        <div class="card__cap">
-          <span class="card__no">03</span>
-          <h3 data-i="c3.h">Plagáty</h3>
-          <p data-i="c3.p">Pre tlač aj obrazovku, od typografie po finálny súbor.</p>
-          <ul class="pills"><li data-i="p.print">Tlač</li><li data-i="p.type">Typografia</li><li data-i="p.screen">Obrazovka</li></ul>
-        </div>
-      </article>
-    </div>
-  </section>
-
-
-  <!-- ============ ALL WORK ============ -->
-  <section class="gallery-sec" id="vsetko" aria-labelledby="gal-h">
-    <div class="wrap">
-      <div class="head">
-        <div>
-          <h2 id="gal-h" class="chrome reveal" data-i="gal.h">Všetky práce</h2>
-          <p class="head__note reveal" data-i="gal.note">Kliknite na prácu a otvorí sa vo väčšom.</p>
-        </div>
-        <div class="filter" role="group" aria-label="Filter">
-          <button class="chip" type="button" aria-pressed="true" data-filter="all" data-cursor="link" data-i="gal.all">Všetko</button>
-          <button class="chip" type="button" aria-pressed="false" data-filter="social" data-cursor="link" data-i="gal.social">Sociálne siete</button>
-          <button class="chip" type="button" aria-pressed="false" data-filter="video" data-cursor="link" data-i="gal.video">Videá</button>
-          <button class="chip" type="button" aria-pressed="false" data-filter="poster" data-cursor="link" data-i="gal.poster">Plagáty</button>
-          <button class="chip" type="button" aria-pressed="false" data-filter="school" data-cursor="link" data-i="gal.school">Škola</button>
-          <button class="chip" type="button" aria-pressed="false" data-filter="parish" data-cursor="link" data-i="gal.parish">Farnosť</button>
-        </div>
-      </div>
-      <div class="gallery" id="gallery">
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="gimber-chatgpt"><img class="fm" src="media/gimber-chatgpt.webp" width="540" height="960" alt="Gimber, ChatGPT" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/gimber-chatgpt.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button>
-          <figcaption><b data-wt="gimber-chatgpt">Gimber, ChatGPT</b><span data-wc="gimber-chatgpt">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="gimber-100"><img class="fm" src="media/gimber-100.webp" width="540" height="960" alt="Gimber, 100 % prírodné" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/gimber-100.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button>
-          <figcaption><b data-wt="gimber-100">Gimber, 100 % prírodné</b><span data-wc="gimber-100">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="video">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="kraus-jarne"><img class="fm" src="media/kraus-jarne.webp" width="540" height="960" alt="Jan Kraus, Jarné turné 2027" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/kraus-jarne.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button>
-          <figcaption><b data-wt="kraus-jarne">Jan Kraus, Jarné turné 2027</b><span data-wc="kraus-jarne">Key Art</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="poster">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-plagat"><img class="fm" src="media/gimber-plagat.webp" width="1080" height="1440" alt="Gimber, plagát" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <figcaption><b data-wt="gimber-plagat">Gimber, plagát</b><span data-wc="gimber-plagat">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="school">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="sost-3dise"><img class="fm" src="media/sost-3dise.webp" width="540" height="960" alt="3DISE konferencia, Praha" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/sost-3dise.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button>
-          <figcaption><b data-wt="sost-3dise">3DISE konferencia, Praha</b><span data-wc="sost-3dise">SOŠT Poprad</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="parish">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="rkc-den"><img class="fm" src="media/rkc-den.webp" width="540" height="960" alt="Deň farnosti 2026" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/rkc-den.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button>
-          <figcaption><b data-wt="rkc-den">Deň farnosti 2026</b><span data-wc="rkc-den">RKC Poprad-Juh</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="laveen-meno"><img class="fm" src="media/laveen-meno.webp" width="540" height="960" alt="Laveen, Peri Meno Balans" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/laveen-meno.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button>
-          <figcaption><b data-wt="laveen-meno">Laveen, Peri Meno Balans</b><span data-wc="laveen-meno">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="laveen-meno-post"><img class="fm" src="media/laveen-meno-post.webp" width="1080" height="1440" alt="Laveen, Menopauza pod kontrolou" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <figcaption><b data-wt="laveen-meno-post">Laveen, Menopauza pod kontrolou</b><span data-wc="laveen-meno-post">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="video">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="kraus-jablonec"><img class="fm" src="media/kraus-jablonec.webp" width="540" height="960" alt="Jan Kraus, Jablonec" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/kraus-jablonec.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button>
-          <figcaption><b data-wt="kraus-jablonec">Jan Kraus, Jablonec</b><span data-wc="kraus-jablonec">Key Art</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="poster">
-          <button type="button" class="frame frame--a has-media" data-cursor="media" data-id="dod"><img class="fm" src="media/dod-modry.webp" width="1061" height="1500" alt="Deň otvorených dverí 2026" loading="lazy" decoding="async"><span class="count glass">1 / 2</span><span class="tag glass">Plagát</span></button>
-          <figcaption><b data-wt="dod">Deň otvorených dverí 2026</b><span data-wc="dod">SOŠT Poprad</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="school">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="sost-rozhovor"><img class="fm" src="media/sost-rozhovor-1.webp" width="1080" height="1440" alt="Rozhovor s Tomášom Barnášom" loading="lazy" decoding="async"><span class="count glass">1 / 2</span><span class="tag glass">Carousel</span></button>
-          <figcaption><b data-wt="sost-rozhovor">Rozhovor s Tomášom Barnášom</b><span data-wc="sost-rozhovor">SOŠT Poprad</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="parish">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="rkc-parkovisko"><img class="fm" src="media/rkc-parkovisko.webp" width="540" height="960" alt="Parkovisko pri kostole, PSK22" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/rkc-parkovisko.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button>
-          <figcaption><b data-wt="rkc-parkovisko">Parkovisko pri kostole, PSK22</b><span data-wc="rkc-parkovisko">RKC Poprad-Juh</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-zima"><img class="fm" src="media/gimber-zima.webp" width="1080" height="1440" alt="Gimber, Je ti zima?" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <figcaption><b data-wt="gimber-zima">Gimber, Je ti zima?</b><span data-wc="gimber-zima">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-pernik"><img class="fm" src="media/gimber-pernik.webp" width="1080" height="1440" alt="Gimber, Vianoce" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <figcaption><b data-wt="gimber-pernik">Gimber, Vianoce</b><span data-wc="gimber-pernik">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="video">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="tenori-pozvanka"><img class="fm" src="media/tenori-pozvanka.webp" width="540" height="960" alt="4 Tenori, pozvánka" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/tenori-pozvanka.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button>
-          <figcaption><b data-wt="tenori-pozvanka">4 Tenori, pozvánka</b><span data-wc="tenori-pozvanka">Key Art</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="poster">
-          <button type="button" class="frame frame--a has-media" data-cursor="media" data-id="anjel"><img class="fm" src="media/anjel.webp" width="1060" height="1500" alt="Anjel Vianoc 2026" loading="lazy" decoding="async"><span class="tag glass">Plagát</span></button>
-          <figcaption><b data-wt="anjel">Anjel Vianoc 2026</b><span data-wc="anjel">SOŠT Poprad</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="school">
-          <button type="button" class="frame frame--916 has-media" data-cursor="media" data-id="sost-3dise-cover"><img class="fm" src="media/sost-3dise-cover.webp" width="844" height="1500" alt="3DISE konferencia, titulka" loading="lazy" decoding="async"><span class="tag glass">Story</span></button>
-          <figcaption><b data-wt="sost-3dise-cover">3DISE konferencia, titulka</b><span data-wc="sost-3dise-cover">SOŠT Poprad</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="parish">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="rkc-manzelia"><img class="fm" src="media/rkc-manzelia.webp" width="540" height="960" alt="Manželia" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/rkc-manzelia.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button>
-          <figcaption><b data-wt="rkc-manzelia">Manželia</b><span data-wc="rkc-manzelia">RKC Poprad-Juh</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-istota"><img class="fm" src="media/gimber-istota.webp" width="1080" height="1440" alt="Gimber, Tvoja istota v každom zápase" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <figcaption><b data-wt="gimber-istota">Gimber, Tvoja istota v každom zápase</b><span data-wc="gimber-istota">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="laveen-vitk"><img class="fm" src="media/laveen-vitk.webp" width="1080" height="1440" alt="Laveen, Vitamín K" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <figcaption><b data-wt="laveen-vitk">Laveen, Vitamín K</b><span data-wc="laveen-vitk">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="video">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="keyart-podujatia"><img class="fm" src="media/keyart-podujatia.webp" width="540" height="960" alt="Najbližšie podujatia" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/keyart-podujatia.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button>
-          <figcaption><b data-wt="keyart-podujatia">Najbližšie podujatia</b><span data-wc="keyart-podujatia">Key Art</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="poster">
-          <button type="button" class="frame frame--a has-media" data-cursor="media" data-id="poster-89"><img class="fm" src="media/poster-89.webp" width="1131" height="1600" alt="Nežná revolúcia" loading="lazy" decoding="async"><span class="tag glass">Plagát</span></button>
-          <figcaption><b data-wt="poster-89">Nežná revolúcia</b><span data-wc="poster-89">Voľná tvorba</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="school">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="sost-plosina"><img class="fm" src="media/sost-plosina.webp" width="540" height="960" alt="Plošina pre vozíčkarov" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/sost-plosina.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button>
-          <figcaption><b data-wt="sost-plosina">Plošina pre vozíčkarov</b><span data-wc="sost-plosina">SOŠT Poprad</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="parish">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="rkc-vianoce"><img class="fm" src="media/rkc-vianoce.webp" width="540" height="960" alt="Vianočné video" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/rkc-vianoce.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button>
-          <figcaption><b data-wt="rkc-vianoce">Vianočné video</b><span data-wc="rkc-vianoce">RKC Poprad-Juh</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="le-bcaa"><img class="fm" src="media/le-bcaa.webp" width="1080" height="1440" alt="Life Extension BCAA" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <figcaption><b data-wt="le-bcaa">Life Extension BCAA</b><span data-wc="le-bcaa">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="puhdistamo"><img class="fm" src="media/puhdistamo.webp" width="1080" height="1440" alt="Puhdistamo, rastlinný proteín" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <figcaption><b data-wt="puhdistamo">Puhdistamo, rastlinný proteín</b><span data-wc="puhdistamo">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="poster">
-          <button type="button" class="frame frame--a has-media" data-cursor="media" data-id="poster-bright"><img class="fm" src="media/poster-bright.webp" width="1131" height="1600" alt="Keep it bright!" loading="lazy" decoding="async"><span class="tag glass">Plagát</span></button>
-          <figcaption><b data-wt="poster-bright">Keep it bright!</b><span data-wc="poster-bright">Voľná tvorba</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="school">
-          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="sost-mentoring"><img class="fm" src="media/sost-mentoring.webp" width="540" height="960" alt="Mentoring" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/sost-mentoring.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button>
-          <figcaption><b data-wt="sost-mentoring">Mentoring</b><span data-wc="sost-mentoring">SOŠT Poprad</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="sonett"><img class="fm" src="media/sonett.webp" width="1080" height="1440" alt="Sonett, Skutočná čistota" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <figcaption><b data-wt="sonett">Sonett, Skutočná čistota</b><span data-wc="sonett">Nontoxic</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="protein"><img class="fm" src="media/protein.webp" width="1080" height="1440" alt="Protein.sk, Magnesium" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <figcaption><b data-wt="protein">Protein.sk, Magnesium</b><span data-wc="protein">Protein.sk</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="poster">
-          <button type="button" class="frame frame--a has-media" data-cursor="media" data-id="poster-apples"><img class="fm" src="media/poster-apples.webp" width="1131" height="1600" alt="An apple a day" loading="lazy" decoding="async"><span class="tag glass">Plagát</span></button>
-          <figcaption><b data-wt="poster-apples">An apple a day</b><span data-wc="poster-apples">Voľná tvorba</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="jack"><img class="fm" src="media/jack-1.webp" width="1080" height="1440" alt="Captain Jack, booking carousel" loading="lazy" decoding="async"><span class="count glass">1 / 4</span><span class="tag glass">Carousel</span></button>
-          <figcaption><b data-wt="jack">Captain Jack, booking carousel</b><span data-wc="jack">Key Art</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="booking-loona"><img class="fm" src="media/booking-loona.webp" width="1080" height="1440" alt="Loona, booking" loading="lazy" decoding="async"><span class="tag glass">Post</span></button>
-          <figcaption><b data-wt="booking-loona">Loona, booking</b><span data-wc="booking-loona">Key Art</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="poster">
-          <button type="button" class="frame frame--a has-media" data-cursor="media" data-id="poster-coke"><img class="fm" src="media/poster-coke.webp" width="1128" height="1600" alt="God Bless Coca Cola" loading="lazy" decoding="async"><span class="tag glass">Plagát</span></button>
-          <figcaption><b data-wt="poster-coke">God Bless Coca Cola</b><span data-wc="poster-coke">Voľná tvorba</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--916 has-media" data-cursor="media" data-id="booking-alfred"><img class="fm" src="media/booking-alfred.webp" width="844" height="1500" alt="Alfred McCrary, story" loading="lazy" decoding="async"><span class="tag glass">Story</span></button>
-          <figcaption><b data-wt="booking-alfred">Alfred McCrary, story</b><span data-wc="booking-alfred">Key Art</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="social">
-          <button type="button" class="frame frame--916 has-media" data-cursor="media" data-id="booking-pamela"><img class="fm" src="media/booking-pamela.webp" width="844" height="1500" alt="Pamela O&#x27;Neal, story" loading="lazy" decoding="async"><span class="tag glass">Story</span></button>
-          <figcaption><b data-wt="booking-pamela">Pamela O&#x27;Neal, story</b><span data-wc="booking-pamela">Key Art</span></figcaption>
-        </figure>
-        <figure class="g-item reveal" data-cat="poster">
-          <button type="button" class="frame frame--21 has-media" data-cursor="media" data-id="gingerburn"><img class="fm" src="media/gingerburn.webp" width="1500" height="750" alt="Ginger Burn Lab, logo" loading="lazy" decoding="async"><span class="tag glass">Logo</span></button>
-          <figcaption><b data-wt="gingerburn">Ginger Burn Lab, logo</b><span data-wc="gingerburn">Ginger Burn Lab</span></figcaption>
-        </figure>
-      </div>
+      <span class="drift drift--a w-34"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-istota" style="--gl:214,199,182"><img class="fm" src="media/gimber-istota.webp" width="1080" height="1440" alt="Gimber, Tvoja istota v každom zápase" decoding="async"><span class="tag glass">Post</span></button></span>
+      <span class="drift drift--b w-916"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="sost-mentoring" style="--gl:16,220,82"><img class="fm" src="media/sost-mentoring.webp" width="540" height="960" alt="Mentoring, otázky" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/sost-mentoring.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button></span>
+      <span class="drift drift--c w-34"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-pernik" style="--gl:166,120,80"><img class="fm" src="media/gimber-pernik.webp" width="1080" height="1440" alt="Gimber, Vianoce" decoding="async"><span class="tag glass">Post</span></button></span>
+      <span class="drift drift--d w-916 is-mid"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="tenori-pozvanka" style="--gl:183,147,93"><img class="fm" src="media/tenori-pozvanka.webp" width="540" height="960" alt="4 Tenori, pozvánka" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/tenori-pozvanka.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button></span>
+      <span class="drift drift--e w-34"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-plagat" style="--gl:26,155,79"><img class="fm" src="media/gimber-plagat.webp" width="1080" height="1440" alt="Gimber, plagát" decoding="async"><span class="tag glass">Plagát</span></button></span>
+      <span class="drift drift--f w-916"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="gimber-chatgpt" style="--gl:156,186,230"><img class="fm" src="media/gimber-chatgpt.webp" width="540" height="960" alt="Gimber, ChatGPT" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/gimber-chatgpt.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button></span>
+      <span class="drift drift--g w-34"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="jack" style="--gl:166,13,14"><img class="fm" src="media/jack-1.webp" width="1080" height="1440" alt="Captain Jack, booking carousel" decoding="async"><span class="count glass">1 / 4</span><span class="tag glass">Carousel</span></button></span>
     </div>
   </section>
 
@@ -350,11 +131,11 @@
         <div class="morph__text">
           <h2 id="robim-h" class="chrome" data-i="svc.h">Čo robím</h2>
           <ol class="morph__list" id="morphList">
-            <li class="is-on" data-ratio="916" data-name="9:16" data-use="Reels, TikTok, reklamy"><h3 data-i="svc.1h">Reelsy a reklamy</h3><p data-i="svc.1p">Krátke videá s rytmom, titulkami a pohybom, ktoré fungujú aj bez zvuku.</p></li>
-            <li data-ratio="45" data-name="4:5" data-use="Post do feedu"><h3 data-i="svc.2h">Sociálne siete</h3><p data-i="svc.2p">Posty a kampane v jednom vizuálnom štýle.</p></li>
-            <li data-ratio="11" data-name="1:1" data-use="Carousel"><h3 data-i="svc.3h">Carousely</h3><p data-i="svc.3p">Príbeh na niekoľko slajdov, každý ťahá na ďalší.</p></li>
-            <li data-ratio="a" data-name="A2" data-use="Tlač, plagát na stenu"><h3 data-i="svc.4h">Plagáty</h3><p data-i="svc.4p">Pre tlač aj obrazovku.</p></li>
-            <li data-ratio="169" data-name="16:9" data-use="YouTube, plátno, reklama"><h3 data-i="svc.5h">Videá</h3><p data-i="svc.5p">Upútavky, zostrihy a reklamné videá od nápadu po hotový strih.</p></li>
+            <li class="is-on" data-ratio="916" data-name="9:16" data-use="Reels, TikTok, reklamy"><span class="mini mini--916" aria-hidden="true">9:16</span><h3 data-i="svc.1h">Reelsy a reklamy</h3><p data-i="svc.1p">Krátke videá s rytmom, titulkami a pohybom, ktoré fungujú aj bez zvuku.</p></li>
+            <li data-ratio="45" data-name="4:5" data-use="Post do feedu"><span class="mini mini--45" aria-hidden="true">4:5</span><h3 data-i="svc.2h">Sociálne siete</h3><p data-i="svc.2p">Posty a kampane v jednom vizuálnom štýle.</p></li>
+            <li data-ratio="11" data-name="1:1" data-use="Carousel"><span class="mini mini--11" aria-hidden="true">1:1</span><h3 data-i="svc.3h">Carousely</h3><p data-i="svc.3p">Príbeh na niekoľko slajdov, každý ťahá na ďalší.</p></li>
+            <li data-ratio="a" data-name="A2" data-use="Tlač, plagát na stenu"><span class="mini mini--a" aria-hidden="true">A2</span><h3 data-i="svc.4h">Plagáty</h3><p data-i="svc.4p">Pre tlač aj obrazovku.</p></li>
+            <li data-ratio="169" data-name="16:9" data-use="YouTube, plátno, reklama"><span class="mini mini--169" aria-hidden="true">16:9</span><h3 data-i="svc.5h">Videá</h3><p data-i="svc.5p">Upútavky, zostrihy a reklamné videá od nápadu po hotový strih.</p></li>
           </ol>
         </div>
         <div class="morph__stage" aria-hidden="true">
@@ -395,6 +176,126 @@
           <li><b data-i="proc.4h">Odovzdanie</b><span data-i="proc.4p">Dostanete všetky formáty pripravené na zverejnenie.</span></li>
         </ol>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ SHOWREEL ============ -->
+  <section class="showreel" id="showreel" aria-labelledby="reel-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="reel-h" class="chrome reveal">Showreel</h2>
+        <p class="head__note reveal" data-i="reel.note">Najlepšie strihy v jednom videu.</p>
+      </div>
+      <button type="button" class="frame frame--169 has-media showreel__frame reveal" data-cursor="media" data-id="showreel" style="--gl:212,140,192"><img class="fm" src="media/showreel.webp" width="1280" height="720" alt="Showreel" loading="lazy"><video class="fm fm--v fm--auto" muted loop playsinline preload="none" data-src="media/p/showreel.mp4" aria-hidden="true"></video><span class="showreel__play glass"><span class="play-ico" aria-hidden="true"></span><span data-i="reel.play">Pustiť showreel</span></span><span class="tag glass">0:22</span></button>
+    </div>
+  </section>
+
+  <!-- ============ WORK ============ -->
+  <section class="work" id="prace" aria-labelledby="prace-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="prace-h" class="chrome reveal" data-i="work.h">Práce</h2>
+        <p class="head__note reveal" data-i="work.note">Posty, reelsy a plagáty pre značky, agentúru a školu. Kliknite na ktorúkoľvek prácu.</p>
+      </div>
+    </div>
+    <div class="stack wrap">
+      <article class="card glass">
+        <div class="card__media card__media--c1">
+          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-pernik" style="--gl:166,120,80"><img class="fm" src="media/gimber-pernik.webp" width="1080" height="1440" alt="Gimber, Vianoce" loading="lazy" decoding="async"><span class="tag glass">Post</span></button><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-istota" style="--gl:214,199,182"><img class="fm" src="media/gimber-istota.webp" width="1080" height="1440" alt="Gimber, Tvoja istota v každom zápase" loading="lazy" decoding="async"><span class="tag glass">Post</span></button><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="jack" style="--gl:166,13,14"><img class="fm" src="media/jack-1.webp" width="1080" height="1440" alt="Captain Jack, booking carousel" loading="lazy" decoding="async"><span class="count glass">1 / 4</span><span class="tag glass">Carousel</span></button>
+        </div>
+        <div class="card__cap">
+          <span class="card__no">01</span>
+          <h3 data-i="c1.h">Posty</h3>
+          <p data-i="c1.p">Posty, carousely a stories, ktoré držia jeden štýl naprieč celou značkou.</p>
+          <ul class="pills"><li data-i="p.posts">Posty</li><li data-i="p.carousels">Carousely</li><li>Stories</li></ul>
+        </div>
+      </article>
+      <article class="card glass">
+        <div class="card__media card__media--c2">
+          <button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="tenori-pozvanka" style="--gl:183,147,93"><img class="fm" src="media/tenori-pozvanka.webp" width="540" height="960" alt="4 Tenori, pozvánka" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/tenori-pozvanka.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="sost-mentoring" style="--gl:16,220,82"><img class="fm" src="media/sost-mentoring.webp" width="540" height="960" alt="Mentoring, otázky" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/sost-mentoring.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="gimber-chatgpt" style="--gl:156,186,230"><img class="fm" src="media/gimber-chatgpt.webp" width="540" height="960" alt="Gimber, ChatGPT" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/gimber-chatgpt.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button>
+        </div>
+        <div class="card__cap">
+          <span class="card__no">02</span>
+          <h3 data-i="c2.h">Reelsy</h3>
+          <p data-i="c2.p">Strih, titulky a pohyb. Krátke videá, ktoré ľudia dopozerajú aj bez zvuku.</p>
+          <ul class="pills"><li>Reels</li><li data-i="p.ads">Reklamy</li><li data-i="p.edit">Strih</li></ul>
+        </div>
+      </article>
+      <article class="card glass">
+        <div class="card__media card__media--c3">
+          <button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-plagat" style="--gl:26,155,79"><img class="fm" src="media/gimber-plagat.webp" width="1080" height="1440" alt="Gimber, plagát" loading="lazy" decoding="async"><span class="tag glass">Plagát</span></button><button type="button" class="frame frame--a has-media" data-cursor="media" data-id="anjel" style="--gl:230,47,29"><img class="fm" src="media/anjel.webp" width="1060" height="1500" alt="Anjel Vianoc 2026" loading="lazy" decoding="async"><span class="tag glass">Plagát</span></button><button type="button" class="frame frame--a has-media" data-cursor="media" data-id="dod" style="--gl:7,20,41"><img class="fm" src="media/dod-modry.webp" width="1061" height="1500" alt="Deň otvorených dverí 2026" loading="lazy" decoding="async"><span class="count glass">1 / 2</span><span class="tag glass">Plagát</span></button>
+        </div>
+        <div class="card__cap">
+          <span class="card__no">03</span>
+          <h3 data-i="c3.h">Plagáty</h3>
+          <p data-i="c3.p">Pre tlač aj obrazovku, od typografie po finálny súbor.</p>
+          <ul class="pills"><li data-i="p.print">Tlač</li><li data-i="p.type">Typografia</li><li data-i="p.screen">Obrazovka</li></ul>
+        </div>
+      </article>
+    </div>
+    <div class="wrap more">
+      <div class="more__head">
+        <h3 class="more__h" data-i="more.h">Ďalšie práce</h3>
+        <a class="btn btn--glass glass more__all" href="prace.html" data-cursor="link"><span data-i="more.all">Všetky práce</span>&nbsp;<span class="more__n">(55)</span></a>
+      </div>
+    </div>
+    <div class="strip" id="strip">
+      <figure class="strip__item"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="gimber-zima" style="--gl:123,106,66"><img class="fm" src="media/gimber-zima.webp" width="1080" height="1440" alt="Gimber, Je ti zima?" loading="lazy" decoding="async"><span class="tag glass">Post</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="kraus-jarne" style="--gl:3,10,12"><img class="fm" src="media/kraus-jarne.webp" width="540" height="960" alt="Jan Kraus, Jarné turné 2027" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/kraus-jarne.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--a has-media" data-cursor="media" data-id="poster-89" style="--gl:224,51,50"><img class="fm" src="media/poster-89.webp" width="1131" height="1600" alt="Nežná revolúcia" loading="lazy" decoding="async"><span class="tag glass">Plagát</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="laveen-meno-post" style="--gl:32,141,78"><img class="fm" src="media/laveen-meno-post.webp" width="1080" height="1440" alt="Laveen, Menopauza pod kontrolou" loading="lazy" decoding="async"><span class="tag glass">Post</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="sost-3dise" style="--gl:50,0,191"><img class="fm" src="media/sost-3dise.webp" width="540" height="960" alt="3DISE konferencia, Praha" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/sost-3dise.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="gimber-100" style="--gl:228,178,121"><img class="fm" src="media/gimber-100.webp" width="540" height="960" alt="Gimber, 100 % prírodné" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/gimber-100.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--a has-media" data-cursor="media" data-id="poster-bright" style="--gl:221,229,28"><img class="fm" src="media/poster-bright.webp" width="1131" height="1600" alt="Keep it bright!" loading="lazy" decoding="async"><span class="tag glass">Plagát</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="laveen-vitk" style="--gl:67,165,80"><img class="fm" src="media/laveen-vitk.webp" width="1080" height="1440" alt="Laveen, Vitamín K" loading="lazy" decoding="async"><span class="tag glass">Post</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="rkc-parkovisko" style="--gl:130,121,97"><img class="fm" src="media/rkc-parkovisko.webp" width="540" height="960" alt="Parkovisko pri kostole, PSK22" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/rkc-parkovisko.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Video</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="sonett" style="--gl:171,134,93"><img class="fm" src="media/sonett.webp" width="1080" height="1440" alt="Sonett, Skutočná čistota" loading="lazy" decoding="async"><span class="tag glass">Post</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="kraus-jablonec" style="--gl:136,128,117"><img class="fm" src="media/kraus-jablonec.webp" width="540" height="960" alt="Jan Kraus, Jablonec" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/kraus-jablonec.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="booking-loona" style="--gl:123,19,19"><img class="fm" src="media/booking-loona.webp" width="1080" height="1440" alt="Loona, booking" loading="lazy" decoding="async"><span class="tag glass">Post</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--34 has-media" data-cursor="media" data-id="protein" style="--gl:25,99,159"><img class="fm" src="media/protein.webp" width="1080" height="1440" alt="Magnesium, produktový post" loading="lazy" decoding="async"><span class="tag glass">Post</span></button></figure>
+      <figure class="strip__item"><button type="button" class="frame frame--a has-media" data-cursor="media" data-id="poster-apples" style="--gl:249,193,24"><img class="fm" src="media/poster-apples.webp" width="1131" height="1600" alt="An apple a day" loading="lazy" decoding="async"><span class="tag glass">Plagát</span></button></figure>
+      <a class="strip__end glass" href="prace.html" data-cursor="link">
+        <span class="strip__n">55</span>
+        <span data-i="more.end">prác na mape. Ťahajte, klikajte, objavujte.</span>
+        <span class="strip__go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ CAMPAIGN ============ -->
+  <section class="camp" id="kampan" aria-labelledby="camp-h">
+    <div class="wrap">
+      <div class="camp__head">
+        <div>
+          <span class="camp__client reveal">Laveen × Nontoxic</span>
+          <h2 id="camp-h" class="chrome reveal" data-i="camp.h">Celá kampaň od jedného človeka</h2>
+        </div>
+        <p class="head__note reveal" data-i="camp.p">Doplnky výživy Laveen pre e-shop Nontoxic. Dva koncepty, reklamy pre Metu aj Google a videá, všetko pripravené na spustenie.</p>
+      </div>
+      <dl class="camp__stats reveal">
+        <div><dt data-i="camp.s1">koncepty</dt><dd>2</dd></div>
+        <div><dt data-i="camp.s2">vizuálov</dt><dd>23</dd></div>
+        <div><dt data-i="camp.s3">videí</dt><dd>8</dd></div>
+        <div><dt data-i="camp.s4">platformy</dt><dd>Meta + Google</dd></div>
+      </dl>
+      <div class="camp__tabs reveal" role="group" aria-label="Koncept">
+        <button type="button" class="camp__tab" data-c="a" aria-pressed="true" data-cursor="link"><b>A</b><span data-i="camp.a">Produkt a zloženie</span></button>
+        <button type="button" class="camp__tab" data-c="b" aria-pressed="false" data-cursor="link"><b>B</b><span data-i="camp.b">Rodinný život</span></button>
+      </div>
+    </div>
+    <div class="camp__board">
+      <div class="camp__glow" aria-hidden="true"></div>
+        <div class="bd" data-c="a">
+          <div class="bd__row"><div class="bd__it" style="--r:9/16;--i:1"><button type="button" class="frame frame--916 has-media" data-cursor="media" data-id="lv-a-story" style="--gl:246,241,229"><img class="fm" src="media/lv-a-story.webp" width="675" height="1200" alt="Laveen, story produktov" loading="lazy" decoding="async"><span class="tag glass">Story · 9:16</span></button></div><div class="bd__it" style="--r:9/16;--i:2"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="lv-r-d3k2" style="--gl:243,228,192"><img class="fm" src="media/lv-r-d3k2.webp" width="540" height="960" alt="Laveen, D3 + K2, reel" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/lv-r-d3k2.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel · 9:16</span></button></div><div class="bd__it" style="--r:4/5;--i:3"><button type="button" class="frame frame--45 has-media" data-cursor="media" data-id="lv-a-feed-45" style="--gl:241,222,215"><img class="fm" src="media/lv-a-feed-45.webp" width="960" height="1200" alt="Laveen, Vega Mama Multi" loading="lazy" decoding="async"><span class="tag glass">Feed · 4:5</span></button></div><div class="bd__it" style="--r:4/5;--i:4"><button type="button" class="frame frame--45 has-media" data-cursor="media" data-id="lv-v-d3k2" style="--gl:243,228,192"><img class="fm" src="media/lv-v-d3k2.webp" width="720" height="900" alt="Laveen, D3 + K2" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/lv-v-d3k2.mp4" aria-hidden="true"></video><span class="play glass"></span><span class="tag glass">Video · 4:5</span></button></div></div>
+          <div class="bd__row"><div class="bd__it" style="--r:1;--i:5"><button type="button" class="frame frame--11 has-media" data-cursor="media" data-id="lv-a-car" style="--gl:244,229,193"><img class="fm" src="media/lv-a-car-1.webp" width="1080" height="1080" alt="Laveen, carousel produktov" loading="lazy" decoding="async"><span class="count glass">1 / 4</span><span class="tag glass">Carousel · 1:1</span></button></div><div class="bd__it" style="--r:1200/628;--i:6"><button type="button" class="frame frame--pm has-media" data-cursor="media" data-id="lv-a-pmax" style="--gl:237,226,202"><img class="fm" src="media/lv-a-pmax-w.webp" width="1200" height="628" alt="Laveen, Google PMax A" loading="lazy" decoding="async"><span class="count glass">1 / 3</span><span class="tag glass">Google · 1,91:1</span></button></div><div class="bd__it" style="--r:1;--i:7"><button type="button" class="frame frame--11 has-media" data-cursor="media" data-id="lv-a-feed-11" style="--gl:244,229,193"><img class="fm" src="media/lv-a-feed-11.webp" width="1080" height="1080" alt="Laveen, D3 + K2" loading="lazy" decoding="async"><span class="tag glass">Feed · 1:1</span></button></div></div>
+        </div>
+        <div class="bd" data-c="b" hidden>
+          <div class="bd__row"><div class="bd__it" style="--r:9/16;--i:1"><button type="button" class="frame frame--916 has-media" data-cursor="media" data-id="lv-b-story" style="--gl:118,86,59"><img class="fm" src="media/lv-b-story.webp" width="675" height="1200" alt="Laveen, rodinná story" loading="lazy" decoding="async"><span class="tag glass">Story · 9:16</span></button></div><div class="bd__it" style="--r:9/16;--i:2"><button type="button" class="frame frame--916 has-media reel" data-cursor="media" data-id="lv-r-ranajky" style="--gl:161,132,99"><img class="fm" src="media/lv-r-ranajky.webp" width="540" height="960" alt="Laveen, Raňajky, reel" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/lv-r-ranajky.mp4" aria-hidden="true"></video><span class="safe"></span><span class="play glass"></span><span class="tag glass">Reel · 9:16</span></button></div><div class="bd__it" style="--r:4/5;--i:3"><button type="button" class="frame frame--45 has-media" data-cursor="media" data-id="lv-b-feed-45" style="--gl:114,82,55"><img class="fm" src="media/lv-b-feed-45.webp" width="960" height="1200" alt="Laveen, ráno s Laveen" loading="lazy" decoding="async"><span class="tag glass">Feed · 4:5</span></button></div><div class="bd__it" style="--r:1;--i:4"><button type="button" class="frame frame--11 has-media" data-cursor="media" data-id="lv-v-ranajky" style="--gl:108,66,42"><img class="fm" src="media/lv-v-ranajky.webp" width="720" height="720" alt="Laveen, Raňajky" loading="lazy" decoding="async"><video class="fm fm--v" muted loop playsinline preload="none" data-src="media/p/lv-v-ranajky.mp4" aria-hidden="true"></video><span class="play glass"></span><span class="tag glass">Video · 1:1</span></button></div></div>
+          <div class="bd__row"><div class="bd__it" style="--r:1;--i:5"><button type="button" class="frame frame--11 has-media" data-cursor="media" data-id="lv-b-car" style="--gl:244,229,193"><img class="fm" src="media/lv-b-car-1.webp" width="1080" height="1080" alt="Laveen, deň s rodinou" loading="lazy" decoding="async"><span class="count glass">1 / 4</span><span class="tag glass">Carousel · 1:1</span></button></div><div class="bd__it" style="--r:1200/628;--i:6"><button type="button" class="frame frame--pm has-media" data-cursor="media" data-id="lv-b-pmax" style="--gl:112,77,51"><img class="fm" src="media/lv-b-pmax-w.webp" width="1200" height="628" alt="Laveen, Google PMax B" loading="lazy" decoding="async"><span class="count glass">1 / 3</span><span class="tag glass">Google · 1,91:1</span></button></div><div class="bd__it" style="--r:1;--i:7"><button type="button" class="frame frame--11 has-media" data-cursor="media" data-id="lv-b-feed-11" style="--gl:246,241,229"><img class="fm" src="media/lv-b-feed-11.webp" width="1080" height="1080" alt="Laveen, každodenná rutina" loading="lazy" decoding="async"><span class="tag glass">Feed · 1:1</span></button></div></div>
+        </div>
+    </div>
+    <div class="wrap camp__foot">
+      <a class="btn btn--glass glass" href="prace.html#kampan" data-cursor="link"><span data-i="camp.all">Celá kampaň na mape</span>&nbsp;<span class="more__n">(18)</span></a>
     </div>
   </section>
 
@@ -452,12 +353,12 @@
             <h2 id="cta-h"><span class="chrome" data-i="cta.h1">Máte projekt?</span><span class="brand" data-i="cta.h2">Napíšte mi.</span></h2>
             <p data-i="cta.p">Grafika alebo video, zákazka alebo spolupráca. Pošlite pár viet a ozvem sa.</p>
             <ul class="contact-list">
-              <li><a href="mailto:jozeflavko3@gmail.com" data-cursor="link">jozeflavko3@gmail.com</a></li>
+              <li class="mailrow"><a href="mailto:jozeflavko3@gmail.com" data-cursor="link">jozeflavko3@gmail.com</a><button type="button" class="copy glass" data-copy="jozeflavko3@gmail.com" data-cursor="link" data-i="copy">Kopírovať</button></li>
               <li><a href="https://www.instagram.com/josk0/" target="_blank" rel="noopener" data-cursor="link">Instagram @josk0</a></li>
               <li><a href="https://wa.me/421948018616" target="_blank" rel="noopener" data-cursor="link">WhatsApp +421 948 018 616</a></li>
             </ul>
-            <!-- Rezervácia hovoru: založte si účet na cal.com a nahraďte TVOJ-UCET svojím menom -->
-            <a class="btn btn--glass glass cta__call" href="https://cal.com/TVOJ-UCET/15min" target="_blank" rel="noopener" data-cursor="link" data-i="cta.call">Rezervovať 15 min hovor</a>
+            <!-- Rezervácia hovoru: keď si založíte účet na cal.com, odkomentujte riadok nižšie a doplňte svoje meno.
+            <a class="btn btn--glass glass cta__call" href="https://cal.com/VASE-MENO/15min" target="_blank" rel="noopener" data-cursor="link" data-i="cta.call">Rezervovať 15 min hovor</a> -->
           </div>
           <form class="form" id="form" novalidate>
             <label class="f"><span data-i="f.name">Meno</span><input name="meno" type="text" autocomplete="name" required></label>
@@ -486,13 +387,14 @@
 <footer class="footer">
   <div class="wrap footer__grid">
     <div class="footer__brand"><span class="mark">JL</span><div><b>Jozef Lavko</b><span data-i="foot.role">Grafický dizajnér a editor, Poprad</span></div></div>
-    <nav class="footer__col" aria-label="Stránka"><b data-i="foot.site">Stránka</b><a href="#prace" data-cursor="link" data-i="nav.work">Práce</a><a href="#robim" data-cursor="link" data-i="nav.services">Čo robím</a><a href="#recenzie" data-cursor="link" data-i="nav.reviews">Recenzie</a></nav>
+    <nav class="footer__col" aria-label="Stránka"><b data-i="foot.site">Stránka</b><a href="#robim" data-cursor="link" data-i="nav.services">Čo robím</a><a href="#prace" data-cursor="link" data-i="nav.work">Práce</a><a href="#kampan" data-cursor="link" data-i="nav.camp">Kampaň</a><a href="#recenzie" data-cursor="link" data-i="nav.reviews">Recenzie</a></nav>
     <nav class="footer__col" aria-label="Kontakt"><b data-i="foot.contact">Kontakt</b><a href="mailto:jozeflavko3@gmail.com" data-cursor="link">jozeflavko3@gmail.com</a><a href="https://www.instagram.com/josk0/" target="_blank" rel="noopener" data-cursor="link">@josk0</a><a href="https://wa.me/421948018616" target="_blank" rel="noopener" data-cursor="link">WhatsApp</a></nav>
-    <p class="footer__end">Jozef Lavko, 2026</p>
+    <p class="footer__end"><span>Jozef Lavko, 2026</span><a href="#top" class="totop" data-cursor="link" data-i="totop">Späť hore</a></p>
   </div>
   <div class="footer__big" aria-hidden="true">Jozef Lavko</div>
 </footer>
 
+<div class="edgeblur" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="dock glass" id="dock">
   <a class="dock__msg" href="#kontakt" data-cursor="link"><span class="dock__dot" aria-hidden="true"></span><span data-i="dock">Beriem nové projekty</span></a>
   <a class="dock__ico" href="mailto:jozeflavko3@gmail.com" aria-label="E-mail" data-cursor="link"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></a>
@@ -515,7 +417,7 @@
   </div>
 </dialog>
 
-<script>window.WORKS={"gimber-chatgpt": {"type": "video", "asp": "916", "cat": "social", "t": ["Gimber, ChatGPT", "Gimber, ChatGPT"], "c": "Nontoxic", "x": ["Reel postavený na otázke do ChatGPT: aký je najlepší nealko zázvorový nápoj.", "A reel built around asking ChatGPT for the best non-alcoholic ginger drink."], "k": ["Reel", "Reel"], "src": "media/gimber-chatgpt.mp4", "poster": "media/gimber-chatgpt.webp", "slides": null}, "gimber-100": {"type": "video", "asp": "916", "cat": "social", "t": ["Gimber, 100 % prírodné", "Gimber, 100% natural"], "c": "Nontoxic", "x": ["Produktový reel pre zázvorový koncentrát a plechovku Gimber.", "A product reel for Gimber ginger concentrate and the can."], "k": ["Reel", "Reel"], "src": "media/gimber-100.mp4", "poster": "media/gimber-100.webp", "slides": null}, "laveen-meno": {"type": "video", "asp": "916", "cat": "social", "t": ["Laveen, Peri Meno Balans", "Laveen, Peri Meno Balans"], "c": "Nontoxic", "x": ["Reel s vyskakujúcimi benefitmi k novinke.", "A launch reel with pop-up product benefits."], "k": ["Reel", "Reel"], "src": "media/laveen-meno.mp4", "poster": "media/laveen-meno.webp", "slides": null}, "laveen-meno-post": {"type": "image", "asp": "34", "cat": "social", "t": ["Laveen, Menopauza pod kontrolou", "Laveen, menopause launch"], "c": "Nontoxic", "x": ["Post k uvedeniu novinky.", "A post for the product launch."], "k": ["Post", "Post"], "src": "media/laveen-meno-post.webp", "poster": "media/laveen-meno-post.webp", "slides": null}, "gimber-zima": {"type": "image", "asp": "34", "cat": "social", "t": ["Gimber, Je ti zima?", "Gimber, winter post"], "c": "Nontoxic", "x": ["Zimný post kampane.", "A winter campaign post."], "k": ["Post", "Post"], "src": "media/gimber-zima.webp", "poster": "media/gimber-zima.webp", "slides": null}, "gimber-pernik": {"type": "image", "asp": "34", "cat": "social", "t": ["Gimber, Vianoce", "Gimber, Christmas"], "c": "Nontoxic", "x": ["Vianočný post.", "A Christmas post."], "k": ["Post", "Post"], "src": "media/gimber-pernik.webp", "poster": "media/gimber-pernik.webp", "slides": null}, "gimber-istota": {"type": "image", "asp": "34", "cat": "social", "t": ["Gimber, Tvoja istota v každom zápase", "Gimber, football post"], "c": "Nontoxic", "x": ["Post k futbalu.", "A football-themed post."], "k": ["Post", "Post"], "src": "media/gimber-istota.webp", "poster": "media/gimber-istota.webp", "slides": null}, "laveen-vitk": {"type": "image", "asp": "34", "cat": "social", "t": ["Laveen, Vitamín K", "Laveen, vitamin K"], "c": "Nontoxic", "x": ["Post k vitamínu K pre dojčatá.", "A post for vitamin K drops for babies."], "k": ["Post", "Post"], "src": "media/laveen-vitk.webp", "poster": "media/laveen-vitk.webp", "slides": null}, "le-bcaa": {"type": "image", "asp": "34", "cat": "social", "t": ["Life Extension BCAA", "Life Extension BCAA"], "c": "Nontoxic", "x": ["Post k novinke.", "A new product post."], "k": ["Post", "Post"], "src": "media/le-bcaa.webp", "poster": "media/le-bcaa.webp", "slides": null}, "puhdistamo": {"type": "image", "asp": "34", "cat": "social", "t": ["Puhdistamo, rastlinný proteín", "Puhdistamo, plant protein"], "c": "Nontoxic", "x": ["Post k novinke.", "A new product post."], "k": ["Post", "Post"], "src": "media/puhdistamo.webp", "poster": "media/puhdistamo.webp", "slides": null}, "sonett": {"type": "image", "asp": "34", "cat": "social", "t": ["Sonett, Skutočná čistota", "Sonett, real clean"], "c": "Nontoxic", "x": ["Produktový post.", "A product post."], "k": ["Post", "Post"], "src": "media/sonett.webp", "poster": "media/sonett.webp", "slides": null}, "protein": {"type": "image", "asp": "34", "cat": "social", "t": ["Protein.sk, Magnesium", "Protein.sk, Magnesium"], "c": "Protein.sk", "x": ["Produktový post.", "A product post."], "k": ["Post", "Post"], "src": "media/protein.webp", "poster": "media/protein.webp", "slides": null}, "jack": {"type": "set", "asp": "34", "cat": "social", "t": ["Captain Jack, booking carousel", "Captain Jack, booking carousel"], "c": "Key Art", "x": ["Carousel pre usporiadateľov podujatí.", "A carousel for event organisers."], "k": ["Carousel", "Carousel"], "src": null, "poster": "media/jack-1.webp", "slides": ["media/jack-1.webp", "media/jack-2.webp", "media/jack-3.webp", "media/jack-4.webp"]}, "booking-loona": {"type": "image", "asp": "34", "cat": "social", "t": ["Loona, booking", "Loona, booking"], "c": "Key Art", "x": ["Booking post pre usporiadateľov.", "A booking post for event organisers."], "k": ["Post", "Post"], "src": "media/booking-loona.webp", "poster": "media/booking-loona.webp", "slides": null}, "booking-alfred": {"type": "image", "asp": "916", "cat": "social", "t": ["Alfred McCrary, story", "Alfred McCrary, story"], "c": "Key Art", "x": ["Booking story.", "A booking story."], "k": ["Story", "Story"], "src": "media/booking-alfred.webp", "poster": "media/booking-alfred.webp", "slides": null}, "booking-pamela": {"type": "image", "asp": "916", "cat": "social", "t": ["Pamela O'Neal, story", "Pamela O'Neal, story"], "c": "Key Art", "x": ["Booking story.", "A booking story."], "k": ["Story", "Story"], "src": "media/booking-pamela.webp", "poster": "media/booking-pamela.webp", "slides": null}, "kraus-jarne": {"type": "video", "asp": "916", "cat": "video", "t": ["Jan Kraus, Jarné turné 2027", "Jan Kraus, spring tour 2027"], "c": "Key Art", "x": ["Reel k turné po Česku.", "A reel for a tour across Czechia."], "k": ["Reel", "Reel"], "src": "media/kraus-jarne.mp4", "poster": "media/kraus-jarne.webp", "slides": null}, "kraus-jablonec": {"type": "video", "asp": "916", "cat": "video", "t": ["Jan Kraus, Jablonec", "Jan Kraus, Jablonec"], "c": "Key Art", "x": ["Pozvánka pre jedno mesto turné.", "An invite for one tour stop."], "k": ["Reel", "Reel"], "src": "media/kraus-jablonec.mp4", "poster": "media/kraus-jablonec.webp", "slides": null}, "tenori-pozvanka": {"type": "video", "asp": "916", "cat": "video", "t": ["4 Tenori, pozvánka", "4 Tenori, invite"], "c": "Key Art", "x": ["Pozvánka na koncerty.", "An invite to the concerts."], "k": ["Reel", "Reel"], "src": "media/tenori-pozvanka.mp4", "poster": "media/tenori-pozvanka.webp", "slides": null}, "keyart-podujatia": {"type": "video", "asp": "916", "cat": "video", "t": ["Najbližšie podujatia", "Upcoming events"], "c": "Key Art", "x": ["Prehľad podujatí agentúry v jednom reeli.", "The agency’s upcoming events in one reel."], "k": ["Reel", "Reel"], "src": "media/keyart-podujatia.mp4", "poster": "media/keyart-podujatia.webp", "slides": null}, "gimber-plagat": {"type": "image", "asp": "34", "cat": "poster", "t": ["Gimber, plagát", "Gimber, poster"], "c": "Nontoxic", "x": ["Plagát s QR kódom do e-shopu.", "A poster with a QR code to the online store."], "k": ["Post", "Post"], "src": "media/gimber-plagat.webp", "poster": "media/gimber-plagat.webp", "slides": null}, "dod": {"type": "set", "asp": "a", "cat": "poster", "t": ["Deň otvorených dverí 2026", "Open day 2026"], "c": "SOŠT Poprad", "x": ["Plagát v dvoch farebných verziách.", "A poster in two colour versions."], "k": ["Plagát", "Poster"], "src": null, "poster": "media/dod-modry.webp", "slides": ["media/dod-modry.webp", "media/dod-biely.webp"]}, "anjel": {"type": "image", "asp": "a", "cat": "poster", "t": ["Anjel Vianoc 2026", "Christmas Angel 2026"], "c": "SOŠT Poprad", "x": ["Vianočný plagát.", "A Christmas poster."], "k": ["Plagát", "Poster"], "src": "media/anjel.webp", "poster": "media/anjel.webp", "slides": null}, "poster-89": {"type": "image", "asp": "a", "cat": "poster", "t": ["Nežná revolúcia", "Velvet Revolution"], "c": null, "x": ["Plagát k výročiu Novembra 1989.", "A poster for the anniversary of November 1989."], "k": ["Plagát", "Poster"], "src": "media/poster-89.webp", "poster": "media/poster-89.webp", "slides": null}, "poster-bright": {"type": "image", "asp": "a", "cat": "poster", "t": ["Keep it bright!", "Keep it bright!"], "c": null, "x": ["Voľná tvorba.", "Personal work."], "k": ["Plagát", "Poster"], "src": "media/poster-bright.webp", "poster": "media/poster-bright.webp", "slides": null}, "poster-apples": {"type": "image", "asp": "a", "cat": "poster", "t": ["An apple a day", "An apple a day"], "c": null, "x": ["Voľná tvorba.", "Personal work."], "k": ["Plagát", "Poster"], "src": "media/poster-apples.webp", "poster": "media/poster-apples.webp", "slides": null}, "poster-coke": {"type": "image", "asp": "a", "cat": "poster", "t": ["God Bless Coca Cola", "God Bless Coca Cola"], "c": null, "x": ["Voľná tvorba.", "Personal work."], "k": ["Plagát", "Poster"], "src": "media/poster-coke.webp", "poster": "media/poster-coke.webp", "slides": null}, "gingerburn": {"type": "image", "asp": "21", "cat": "poster", "t": ["Ginger Burn Lab, logo", "Ginger Burn Lab, logo"], "c": "Ginger Burn Lab", "x": ["Návrh loga v dvoch farebných verziách.", "A logo in two colour versions."], "k": ["Logo", "Logo"], "src": "media/gingerburn.webp", "poster": "media/gingerburn.webp", "slides": null}, "sost-3dise": {"type": "video", "asp": "916", "cat": "school", "t": ["3DISE konferencia, Praha", "3DISE conference, Prague"], "c": "SOŠT Poprad", "x": ["Video z konferencie 3DISE.", "A video from the 3DISE conference."], "k": ["Video", "Video"], "src": "media/sost-3dise.mp4", "poster": "media/sost-3dise.webp", "slides": null}, "sost-rozhovor": {"type": "set", "asp": "34", "cat": "school", "t": ["Rozhovor s Tomášom Barnášom", "Interview with Tomáš Barnáš"], "c": "SOŠT Poprad", "x": ["Carousel v štýle starých okien Windows.", "A carousel styled like old Windows windows."], "k": ["Carousel", "Carousel"], "src": null, "poster": "media/sost-rozhovor-1.webp", "slides": ["media/sost-rozhovor-1.webp", "media/sost-rozhovor-2.webp"]}, "sost-3dise-cover": {"type": "image", "asp": "916", "cat": "school", "t": ["3DISE konferencia, titulka", "3DISE conference, cover"], "c": "SOŠT Poprad", "x": ["Titulka k videu.", "A video cover."], "k": ["Story", "Story"], "src": "media/sost-3dise-cover.webp", "poster": "media/sost-3dise-cover.webp", "slides": null}, "sost-plosina": {"type": "video", "asp": "916", "cat": "school", "t": ["Plošina pre vozíčkarov", "Wheelchair lift"], "c": "SOŠT Poprad", "x": ["Video o bezbariérovej plošine v škole.", "A video about the school’s wheelchair lift."], "k": ["Video", "Video"], "src": "media/sost-plosina.mp4", "poster": "media/sost-plosina.webp", "slides": null}, "sost-mentoring": {"type": "video", "asp": "916", "cat": "school", "t": ["Mentoring", "Mentoring"], "c": "SOŠT Poprad", "x": ["Video k školskému mentoringu.", "A video about the school mentoring programme."], "k": ["Video", "Video"], "src": "media/sost-mentoring.mp4", "poster": "media/sost-mentoring.webp", "slides": null}, "rkc-den": {"type": "video", "asp": "916", "cat": "parish", "t": ["Deň farnosti 2026", "Parish day 2026"], "c": "RKC Poprad-Juh", "x": ["Pozvánka na Deň farnosti.", "An invite to the parish day."], "k": ["Video", "Video"], "src": "media/rkc-den.mp4", "poster": "media/rkc-den.webp", "slides": null}, "rkc-parkovisko": {"type": "video", "asp": "916", "cat": "parish", "t": ["Parkovisko pri kostole, PSK22", "Church car park, PSK22"], "c": "RKC Poprad-Juh", "x": ["Výzva hlasovať za projekt v participatívnom rozpočte PSK.", "A call to vote for the project in the regional participatory budget."], "k": ["Video", "Video"], "src": "media/rkc-parkovisko.mp4", "poster": "media/rkc-parkovisko.webp", "slides": null}, "rkc-manzelia": {"type": "video", "asp": "916", "cat": "parish", "t": ["Manželia", "Married couples"], "c": "RKC Poprad-Juh", "x": ["Video pre farnosť.", "A video for the parish."], "k": ["Video", "Video"], "src": "media/rkc-manzelia.mp4", "poster": "media/rkc-manzelia.webp", "slides": null}, "rkc-vianoce": {"type": "video", "asp": "916", "cat": "parish", "t": ["Vianočné video", "Christmas video"], "c": "RKC Poprad-Juh", "x": ["Vianočný príhovor.", "A Christmas message."], "k": ["Video", "Video"], "src": "media/rkc-vianoce.mp4", "poster": "media/rkc-vianoce.webp", "slides": null}, "showreel": {"type": "video", "asp": "169", "cat": "", "t": ["Showreel", "Showreel"], "c": null, "x": ["Výber z mojich reelsov, reklám a videí.", "A selection of my reels, ads and videos."], "k": ["Video 16:9", "Video 16:9"], "src": "media/showreel.mp4", "poster": "media/showreel.webp", "slides": null}};</script>
+<script src="works.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
